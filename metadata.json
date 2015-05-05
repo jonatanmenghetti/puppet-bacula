@@ -1,0 +1,14 @@
+{
+  "name": "puppet-bacula",
+  "version": "0.1.0",
+  "author": "Jonatan Meneghetti",
+  "summary": "Puppet Module for configure Bacula",
+  "license": "Apache 2.0",
+  "source": "http://gitlab.unimestre.com/puppet/bacula",
+  "project_page": "http://gitlab.unimestre.com/puppet/bacula/blob/master/README.md",
+  "issues_url": "http://gitlab.unimestre.com/puppet/bacula/issues",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+  ]
+}
+
