@@ -12,7 +12,7 @@ Director {
 
 # Now configure the actual File Daemon
 FileDaemon {
-  Name = "<%= hostname.split('.').first -%>"
+  Name = "<%= hostname.split('.').first -%>:fd"
   Working Directory = <%= working_dir %>
   PID Directory = <%= pid_dir %>
   Maximum Concurrent Jobs = 3
