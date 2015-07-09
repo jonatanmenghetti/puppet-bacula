@@ -21,6 +21,8 @@
 #       The bacula-fd pid dir
 #   $working_dir:
 #       The bacula-fd working dir
+#   $max_jobs:
+#       The max cuncorrent Jobs can be running on bacula-fd.
 #
 # Actions:
 #   - Enforce the $client_package package be installed
@@ -44,7 +46,8 @@ class bacula::client (
   $director_server,
   $package_provider       = undef,
   $pid_dir                = '/var/run/bacula',
-  $working_dir            = '/var/lib/bacula'
+  $working_dir            = '/var/lib/bacula',
+  $max_jobs               = 3,
 ) {
 
   $director_name_array  = split($director_server,'[.]')
