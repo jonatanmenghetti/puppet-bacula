@@ -56,6 +56,18 @@ class bacula::client (
   package {$client_package:
     ensure    => installed,
     provider  => $package_provider,
+  } ->
+  file { ['/var/lib/bacula',
+          '/var/run/bacula']:
+    ensure => directory,
+    owner => 'bacula',
+    group => 'bacula',
+    before => Service [$client_service],
+  } ~>
+  service { $client_service:
+    ensure  => running,
+    enable  => true,
+    require => Package [$client_package],
   }
 
   file { $client_conf:
@@ -63,20 +75,6 @@ class bacula::client (
     content => template($client_conf_template),
     notify  => Service [$client_service],
     require => Package [$client_package],
-  }
-
-  service { $client_service:
-    ensure  => running,
-    enable  => true,
-    require => Package [$client_package],
-  }
-
-  file { ['/var/lib/bacula',
-          '/var/run/bacula']:
-    ensure => directory,
-    owner => 'bacula',
-    group => 'bacula',
-    before => Service [$client_service],
   }
 
 }
