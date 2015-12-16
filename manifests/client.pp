@@ -82,7 +82,7 @@ class bacula::client (
   }
 
   if $is_exported {
-    @@bacula::dir::client {
+    @@bacula::dir::client {"$::fqdn"
         name      => "$::fqdn",
         password  => "$director_password",
         director  => "$director_server",
