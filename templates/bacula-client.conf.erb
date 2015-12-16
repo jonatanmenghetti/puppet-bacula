@@ -1,0 +1,24 @@
+# DO NOT EDIT - Managed by Puppet
+#
+# Bacula Director Client Configuration
+#   for <%= fqdn %>
+#   via <%= director_server -%>:director (<%= director_server -%>)
+
+# Configure the Client which backups
+Client {
+  Name = "<%= name -%>:fd"
+  Address = "<%= address %>"
+  FDPort  = 9102
+  Password = "<%= password %>"
+  AutoPrune = yes
+  Maximum Concurrent Jobs = 2
+  Catalog = "<%= catalog %>"
+}
+
+Job {
+    Name = "<%= name -%>:Job"
+    JobDefs = "JDefDB"
+    Client = "<%= name -%>:fd"
+    Pool = PoolDBDia
+    Schedule = Cliente
+}
