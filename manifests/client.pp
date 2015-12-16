@@ -38,16 +38,20 @@
 # }
 
 class bacula::client (
-  $client_conf            = '/etc/bacula/bacula-fd.conf',
-  $client_conf_template   = 'bacula/bacula-fd.conf.erb',
+  $client_conf            = $bacula::params::client_conf,
+  $client_conf_template   = $bacula::params::client_conf_template,
   $client_package         = 'bacula-client',
   $client_service         = 'bacula-fd',
   $director_password,
   $director_server,
   $package_provider       = undef,
-  $pid_dir                = '/var/run/bacula',
-  $working_dir            = '/var/lib/bacula',
+  $pid_dir                = $bacula::params::pid_dir,
+  $working_dir            = $bacula::params::working_dir,
   $max_jobs               = 3,
+  $jobs                   = undef,
+  $schedule               = undef,
+  $address                = undef,
+  $is_exported            = false,
 ) {
 
   $director_name_array  = split($director_server,'[.]')
@@ -77,4 +81,14 @@ class bacula::client (
     require => Package [$client_package],
   }
 
+  if $is_exported {
+    @@bacula::dir::client {
+        name      => "$::fqdn",
+        password  => "$director_password",
+        director  => "$director_server",
+        tag       => "$director_server",
+        jobs      => "$jobs",
+        schedule  => "$schedule",
+    }
+  }
 }
