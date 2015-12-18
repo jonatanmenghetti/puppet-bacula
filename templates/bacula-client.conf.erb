@@ -17,7 +17,7 @@ Client {
 
 <% @jobs.each do |job| %>
 Job {
-    Name = "<%= clientname -%>:<%=job_key-%>"
+    Name = "<%= clientname -%>:<%=job-%>"
   <% @job.each do |key,value| %>
     <%= key -%> = <%= value -%>
   <% end %>
