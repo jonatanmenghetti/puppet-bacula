@@ -1,5 +1,6 @@
 define bacula::dir::client (
-  $bacula_clients_dir = '/etc/bacula/conf.d/Clients',
+  $bacula_clients_dir     = '/etc/bacula/conf.d/Clients',
+  $dir_client_template    = 'bacula-client.conf.erb'
   $name,
   $password,
   $director,
@@ -10,7 +11,7 @@ define bacula::dir::client (
   $catalog,
 ){
   file { "$name.conf":
-    path => "$baucla::params::bacula_clients_dir/$name.conf",
-    template => template($bacula::params::dir_client_template),
+    path => "$bacula_clients_dir/$name.conf",
+    template => template($dir_client_template),
   }
 }
