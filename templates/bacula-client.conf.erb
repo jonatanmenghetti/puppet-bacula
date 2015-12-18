@@ -6,7 +6,7 @@
 
 # Configure the Client which backups
 Client {
-  Name = "<%= fqnd -%>:fd"
+  Name = "<%= clientname -%>:fd"
   Address = "<%= ip %>"
   FDPort  = 9102
   Password = "<%= director_password %>"
@@ -16,7 +16,7 @@ Client {
 }
 
 Job {
-    Name = "<%= fqnd -%>:Job"
+    Name = "<%= clientname -%>:Job"
     JobDefs = "JDefDB"
     Client = "<%= fqnd -%>:fd"
     Pool = PoolDBDia

@@ -54,7 +54,8 @@ class bacula::client (
   $jobschedule            = undef,
   $ip                     = undef,
   $catalog                = undef,
-  $is_exported            = false
+  $is_exported            = false,
+  $clientname             = $::fqdn,
 ) {
 
   $director_name_array  = split($director_server,'[.]')
