@@ -5,7 +5,7 @@ define bacula::dir::client (
   $password,
   $director,
   $jobs,
-  $schedule,
+  $jobschedule,
   $address,
   $catalog,
 ){
