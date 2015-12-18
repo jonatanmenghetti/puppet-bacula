@@ -4,7 +4,6 @@ define bacula::dir::client (
   $name,
   $password,
   $director,
-  $tag,
   $jobs,
   $schedule,
   $address,
