@@ -18,9 +18,6 @@ Client {
 <% @jobs.each do |job| %>
 Job {
     Name = "<%= clientname -%>:<%=job-%>"
-  <% @job.each do |key,value| %>
-    <%= key -%> = <%= value -%>
-  <% end %>
   <!--
     JobDefs = "JDefDB"
     Client = "<%= clientname -%>:fd"
