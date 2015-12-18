@@ -49,7 +49,7 @@ class bacula::client (
   $working_dir            = '/var/lib/bacula',
   $max_jobs               = 3,
   $jobs                   = undef,
-  $schedule               = undef,
+  $jobschedule            = undef,
   $address                = undef,
   $is_exported            = false,
 ) {
@@ -83,12 +83,12 @@ class bacula::client (
 
   if $is_exported {
     @@bacula::dir::client {"$::fqdn":
-        name      => "$::fqdn",
-        password  => "$director_password",
-        director  => "$director_server",
-        tag       => "$director_server",
-        jobs      => "$jobs",
-        schedule  => "$schedule",
+        name        => "$::fqdn",
+        password    => "$director_password",
+        director    => "$director_server",
+        tag         => "$director_server",
+        jobs        => "$jobs",
+        jobschedule => "$jobschedule",
     }
   }
 }
