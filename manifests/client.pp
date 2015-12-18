@@ -44,8 +44,8 @@ class bacula::client (
   $dir_client_template    = 'bacula/bacula-client.conf.erb',
   $client_package         = 'bacula-client',
   $client_service         = 'bacula-fd',
-  $director_password,
-  $director_server,
+  $director_password      = undef,
+  $director_server        = undef,
   $package_provider       = undef,
   $pid_dir                = '/var/run/bacula',
   $working_dir            = '/var/lib/bacula',
@@ -53,7 +53,8 @@ class bacula::client (
   $jobs                   = undef,
   $jobschedule            = undef,
   $address                = undef,
-  $is_exported            = false,
+  $catalog                = undef,
+  $is_exported            = false
 ) {
 
   $director_name_array  = split($director_server,'[.]')
