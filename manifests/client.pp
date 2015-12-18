@@ -91,6 +91,7 @@ class bacula::client (
       path => "$bacula_clients_dir/$::fqdn.conf",
       content => template($dir_client_template),
       tag => 'baculaclient',
+      notify => Class['bacula::reload'],
     }
 
   }
