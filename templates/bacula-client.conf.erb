@@ -15,7 +15,7 @@ Client {
   Catalog = "<%= catalog %>"
 }
 
-<% jobs.each_with_index |key, value| -%>
+<% @jobs.each_with_index |key, value| -%>
 Job {
     Name = "<%= clientname -%>:<%=key-%>"
     <!-- JobDefs = "JDefDB"
