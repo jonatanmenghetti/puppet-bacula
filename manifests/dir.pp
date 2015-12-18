@@ -1,3 +1,3 @@
 class bacula::dir {
-  bacula::dir::Client <<||>>
+  bacula::Dir::client <<||>>
 }
