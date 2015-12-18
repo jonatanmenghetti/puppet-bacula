@@ -1,5 +1,5 @@
 define bacula::dir::client (
-  $bacula_clients_dir = ${baucla::params::bacula_clients_dir},
+  $bacula_clients_dir = '/etc/bacula/conf.d/Clients',
   $name,
   $password,
   $director,
