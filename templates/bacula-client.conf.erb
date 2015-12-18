@@ -15,10 +15,10 @@ Client {
   Catalog = "<%= catalog %>"
 }
 
-<% @jobs.each do |job_key, job_value| %>
+<% @jobs.each do |job| %>
 Job {
     Name = "<%= clientname -%>:<%=job_key-%>"
-  <% @job_value.each do |key,value| %>
+  <% @job.each do |key,value| %>
     <%= key -%> = <%= value -%>
   <% end %>
   <!--
