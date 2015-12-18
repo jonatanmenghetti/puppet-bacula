@@ -52,7 +52,7 @@ class bacula::client (
   $max_jobs               = 3,
   $jobs                   = undef,
   $jobschedule            = undef,
-  $address                = undef,
+  $ip                     = undef,
   $catalog                = undef,
   $is_exported            = false
 ) {
