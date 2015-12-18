@@ -89,7 +89,7 @@ class bacula::client (
 
     @@file { "$::fqdn.conf":
       path => "$bacula_clients_dir/$::fqdn.conf",
-      template => template($dir_client_template),
+      content => template($dir_client_template),
       tag => 'baculaclient',
     }
 
