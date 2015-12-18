@@ -40,6 +40,8 @@
 class bacula::client (
   $client_conf            = '/etc/bacula/bacula-fd.conf',
   $client_conf_template   = 'bacula/bacula-fd.conf.erb',
+  $bacula_clients_dir     = '/etc/bacula/conf.d/Clients',
+  $dir_client_template    = 'bacula-client.conf.erb',
   $client_package         = 'bacula-client',
   $client_service         = 'bacula-fd',
   $director_password,
@@ -82,13 +84,12 @@ class bacula::client (
   }
 
   if $is_exported {
-    @@bacula::dir::client {"$::fqdn":
-        name        => "$::fqdn",
-        password    => "$director_password",
-        director    => "$director_server",
-        tag         => "$director_server",
-        jobs        => "$jobs",
-        jobschedule => "$jobschedule",
+
+    @@ file { "$::fqdn.conf":
+      path => "$bacula_clients_dir/$::fqdn.conf",
+      template => template($dir_client_template),
+      tag => 'baculaclient',
     }
+
   }
 }
