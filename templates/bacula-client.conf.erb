@@ -15,9 +15,9 @@ Client {
   Catalog = "<%= catalog %>"
 }
 
-<% @jobs.each_with_index |key, value| -%>
+<% @jobs.each do |job_key,job_value| -%>
 Job {
-    Name = "<%= clientname -%>:<%=key-%>"
+    Name = "<%= clientname -%>:<%=job_key-%>"
     <!-- JobDefs = "JDefDB"
     Client = "<%= clientname -%>:fd"
     Pool = PoolDBDia
