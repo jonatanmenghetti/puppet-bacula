@@ -38,7 +38,7 @@
 # }
 
 class bacula::client (
-  $client_conf            = $::bacula::params::client_conf,
+  $client_conf            = '/etc/bacula/bacula-fd.conf',
   $client_conf_template   = 'bacula/bacula-fd.conf.erb',
   $client_package         = 'bacula-client',
   $client_service         = 'bacula-fd',
