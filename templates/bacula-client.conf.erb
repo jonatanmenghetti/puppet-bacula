@@ -7,7 +7,7 @@
 # Configure the Client which backups
 Client {
   Name = "<%= clientname -%>:fd"
-  Address = "<%= ip %>"
+  Address = "<%= hostname %>"
   FDPort  = 9102
   Password = "<%= director_password %>"
   AutoPrune = yes
@@ -15,10 +15,12 @@ Client {
   Catalog = "<%= catalog %>"
 }
 
+<% jobs.each_with_index |key, value| -%>
 Job {
-    Name = "<%= clientname -%>:Job"
-    JobDefs = "JDefDB"
+    Name = "<%= clientname -%>:<%=key-%>"
+    <!-- JobDefs = "JDefDB"
     Client = "<%= clientname -%>:fd"
     Pool = PoolDBDia
-    Schedule = Cliente
+    Schedule = Cliente -->
 }
+<% end -%>
