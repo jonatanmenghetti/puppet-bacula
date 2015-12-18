@@ -38,15 +38,15 @@
 # }
 
 class bacula::client (
-  $client_conf            = ${bacula::params::client_conf},
-  $client_conf_template   = ${bacula::params::client_conf_template},
+  $client_conf            = $bacula::params::client_conf,
+  $client_conf_template   = $bacula::params::client_conf_template,
   $client_package         = 'bacula-client',
   $client_service         = 'bacula-fd',
   $director_password,
   $director_server,
   $package_provider       = undef,
-  $pid_dir                = ${bacula::params::pid_dir},
-  $working_dir            = ${bacula::params::working_dir},
+  $pid_dir                = $bacula::params::pid_dir,
+  $working_dir            = $bacula::params::working_dir,
   $max_jobs               = 3,
   $jobs                   = undef,
   $schedule               = undef,
