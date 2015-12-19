@@ -13,3 +13,6 @@ tmtags
 ## VIM
 *.swp
 tags
+
+#Remote
+.remote-sync.json
