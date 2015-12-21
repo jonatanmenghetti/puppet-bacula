@@ -15,12 +15,12 @@ Client {
   Catalog = "<%= catalog %>"
 }
 
-<% @jobs.each do |job| %>
+<% jobs.each do |job| %>
 Job {
     Name = "<%= clientname -%>:<%=job-%>"
     <% @job.each do |rsjob| %>
       valor = <%=rsjob%>
-    <%end%> 
+    <%end%>
   <!--
     JobDefs = "JDefDB"
     Client = "<%= clientname -%>:fd"
