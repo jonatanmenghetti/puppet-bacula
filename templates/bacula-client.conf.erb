@@ -15,9 +15,8 @@ Client {
   Catalog = "<%= catalog %>"
 }
 
-<% jobs.each_with_index do |job_idx,job| %>
+<% @jobs.sort_by {|key, value| key}.each |key,value| %>
 Job {
-    Name = "<%= clientname -%>:<%=job-%>"
-
+    Name = "<%= clientname -%>:<%=key-%>"
 }
 <% end -%>
