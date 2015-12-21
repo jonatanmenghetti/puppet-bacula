@@ -18,13 +18,5 @@ Client {
 <% jobs.each do |job| %>
 Job {
     Name = "<%= clientname -%>:<%=job-%>"
-    <% @job.each do |rsjob| %>
-      valor = <%=rsjob%>
-    <%end%>
-  <!--
-    JobDefs = "JDefDB"
-    Client = "<%= clientname -%>:fd"
-    Pool = PoolDBDia
-    Schedule = Cliente --> -->
 }
 <% end -%>
