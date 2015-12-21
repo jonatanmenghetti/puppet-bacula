@@ -15,7 +15,7 @@ Client {
   Catalog = "<%= catalog %>"
 }
 
-<% jobs.each do |job| %>
+<% jobs.each_with_index do |job,idx| %>
 Job {
     Name = "<%= clientname -%>:<%=job-%>"
 }
