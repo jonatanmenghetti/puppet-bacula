@@ -17,6 +17,6 @@ Client {
 
 <% jobs.each_with_index do |job,idx| %>
 Job {
-    Name = "<%= clientname -%>:<%=job-%>"
+    Name = "<%= clientname -%>:<%=idx-%>"
 }
 <% end -%>
