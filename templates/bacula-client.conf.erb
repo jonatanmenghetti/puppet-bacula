@@ -18,5 +18,8 @@ Client {
 <% jobs.each_with_index do |job,idx| %>
 Job {
     Name = "<%= clientname -%>:<%=idx-%>"
+    <% job.each_with_index do |value,key| %>
+      <%=key-%>=<%=value%>
+    <% end -%>
 }
 <% end -%>
