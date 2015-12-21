@@ -85,11 +85,11 @@ class bacula::client (
   }
 
   if $is_exported {
-    @@ file { "$::clientname.conf":
-      path => "$bacula_clients_dir/$::clientname.conf",
+    @@ file { "$clientname.conf":
+      path => "$bacula_clients_dir/$clientname.conf",
       content => template($dir_client_template),
       tag => 'baculaclient',
-      notify => Exec['breload'],
+      # notify => Exec['breload'],
     }
 
   }
