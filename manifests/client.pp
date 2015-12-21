@@ -85,7 +85,6 @@ class bacula::client (
   }
 
   if $is_exported {
-
     @@file { "$::fqdn.conf":
       path => "$bacula_clients_dir/$::fqdn.conf",
       content => template($dir_client_template),
