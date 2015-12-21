@@ -40,7 +40,7 @@
 class bacula::client (
   $client_conf            = '/etc/bacula/bacula-fd.conf',
   $client_conf_template   = 'bacula/bacula-fd.conf.erb',
-  $bacula_clients_dir     = '/tmp',
+  $bacula_clients_dir     = '/etc/bacula/conf.d/Clients',
   $dir_client_template    = 'bacula/bacula-client.conf.erb',
   $client_package         = 'bacula-client',
   $client_service         = 'bacula-fd',
