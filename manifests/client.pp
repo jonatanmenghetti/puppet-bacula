@@ -40,8 +40,7 @@
 class bacula::client (
   $client_conf            = '/etc/bacula/bacula-fd.conf',
   $client_conf_template   = 'bacula/bacula-fd.conf.erb',
-  $bacula_clients_dir_CERTO     = '/etc/bacula/conf.d/Clients',
-  $bacula_clients_dir     = '/tmp',
+  $bacula_clients_dir     = '/etc/bacula/conf.d/Clients',
   $dir_client_template    = 'bacula/bacula-client.conf.erb',
   $client_package         = 'bacula-client',
   $client_service         = 'bacula-fd',
@@ -87,7 +86,7 @@ class bacula::client (
 
   if $is_exported {
 
-    file { "$::fqdn.conf":
+    @@file { "$::fqdn.conf":
       path => "$bacula_clients_dir/$::fqdn.conf",
       content => template($dir_client_template),
       tag => 'baculaclient',
