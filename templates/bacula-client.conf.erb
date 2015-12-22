@@ -18,6 +18,7 @@ Client {
 <% @jobs.sort_by {|key, value| key}.each do |key,value| -%>
 Job {
   Name = "<%= clientname -%>:<%=key-%>"
+  Client = "<%= clientname -%>:fd"
 <% value.sort_by {|jobkey,jobvalue| jobkey}.each do |jobkey,jobvalue|-%>
   <%=jobkey-%>      = "<%=jobvalue%>"
 <% end -%>
