@@ -89,8 +89,7 @@ class bacula::client (
       path => "$bacula_clients_dir/$clientname.conf",
       content => template($dir_client_template),
       tag => 'baculaclient',
-      # notify => Exec['breload'],
+      notify => Exec['breload'],
     }
-
   }
 }
