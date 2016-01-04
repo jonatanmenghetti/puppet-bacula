@@ -86,23 +86,11 @@ class bacula::client (
   }
 
   if $is_exported {
-    @@concat {"$bacula_clients_dir/$clientname.conf":
-      ensure => present,
-      tag => 'baculaclient',
-    }
-
-    @@concat::fragment { 'config_client_clientname.conf':
-      target => "$bacula_clients_dir/$clientname.conf",
+    @@file { "$clientname.conf":
+      path => "$bacula_clients_dir/$clientname.conf",
       content => template($dir_client_template),
-      notify => Exec['breload'],
       tag => 'baculaclient',
+      notify => Exec['breload'],
     }
-
-    # @@file { "$clientname.conf":
-    #   path => "$bacula_clients_dir/$clientname.conf",
-    #   content => template($dir_client_template),
-    #   tag => 'baculaclient',
-    #   notify => Exec['breload'],
-    # }
   }
 }
