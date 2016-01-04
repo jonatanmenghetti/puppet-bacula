@@ -4,7 +4,8 @@ class bacula::dir (
 ) {
 
   if $manage_clients {
-    File <<| tag == "baculaclient" |>>
+    concat <<| tag == "baculaclient" |>>
+    concat::fragment <<| tag == "baculaclient" |>>
   }
 
   exec {'breload':
