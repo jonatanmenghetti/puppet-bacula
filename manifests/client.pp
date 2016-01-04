@@ -55,6 +55,7 @@ class bacula::client (
   $catalog                = undef,
   $is_exported            = false,
   $clientname             = $::fqdn,
+  $port                   = 9102,
 ) {
 
   $director_name_array  = split($director_server,'[.]')
@@ -85,11 +86,23 @@ class bacula::client (
   }
 
   if $is_exported {
-    @@file { "$clientname.conf":
-      path => "$bacula_clients_dir/$clientname.conf",
-      content => template($dir_client_template),
+    @@concat {"$bacula_clients_dir/$clientname.conf":
+      ensure => present,
       tag => 'baculaclient',
-      notify => Exec['breload'],
     }
+
+    @@concat::fragment { 'config_client_clientname.conf':
+      target => "$bacula_clients_dir/$clientname.conf",
+      content => template($dir_client_template),
+      notify => Exec['breload'],
+      tag => 'baculaclient',
+    }
+
+    # @@file { "$clientname.conf":
+    #   path => "$bacula_clients_dir/$clientname.conf",
+    #   content => template($dir_client_template),
+    #   tag => 'baculaclient',
+    #   notify => Exec['breload'],
+    # }
   }
 }
