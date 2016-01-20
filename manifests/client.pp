@@ -60,7 +60,7 @@ class bacula::client (
   $repo_version           = 5,
 ) {
 
-  class {'bacula::repo:'
+  class {'bacula::repo':
     version => $repo_version,
   }
 
