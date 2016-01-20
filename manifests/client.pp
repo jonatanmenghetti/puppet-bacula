@@ -49,6 +49,7 @@ class bacula::client (
   $package_provider       = undef,
   $pid_dir                = '/var/run/bacula',
   $working_dir            = '/var/lib/bacula',
+  $plugin_dir             = undef,
   $max_jobs               = 3,
   $jobs                   = undef,
   $hostname               = $::ipaddress,
@@ -56,10 +57,20 @@ class bacula::client (
   $is_exported            = false,
   $clientname             = $::fqdn,
   $port                   = 9102,
+  $repo_version           = 5,
 ) {
 
   $director_name_array  = split($director_server,'[.]')
   $director_name        = $director_name_array[0]
+
+  if str2bool("$plugin_dir") {
+    $fd_plugin_dir = $plugin_dir
+  } else {
+    $fd_plugin_dir = $architecture {
+      'x86_64' => '/usr/lib64/bacula',
+      default  => '/usr/lib/bacula',
+    }
+  }
 
   package {$client_package:
     ensure    => installed,

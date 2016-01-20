@@ -16,6 +16,9 @@ FileDaemon {
   Working Directory = <%= working_dir %>
   PID Directory = <%= pid_dir %>
   Maximum Concurrent Jobs = <%= max_jobs %>
+  <% if @repo_version == 7 -%>
+  Plugin Directory = <%= fd_plugin_dir %>
+  <% end -%>
 }
 
 # Finally, set where the messages are going to go
