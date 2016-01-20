@@ -60,6 +60,10 @@ class bacula::client (
   $repo_version           = 5,
 ) {
 
+  class {'bacula::repo:'
+    version => $repo_version,
+  }
+
   $director_name_array  = split($director_server,'[.]')
   $director_name        = $director_name_array[0]
 
