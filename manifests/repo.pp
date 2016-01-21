@@ -9,7 +9,7 @@ class bacula::repo (
 
   if $version == 7 {
     yumrepo { 'epel-bacula7':
-      name => 'Bacula backports from rawhide',
+      desc => 'Bacula backports from rawhide',
       baseurl => 'http://repos.fedorapeople.org/repos/slaanesh/bacula7/epel-$releasever/$basearch/',
       enabled => true,
       skip_if_unavailable => true,
