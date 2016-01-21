@@ -77,7 +77,7 @@ class bacula::client (
   }
 
   package {$client_package:
-    ensure    => installed,
+    ensure    => latest,
     provider  => $package_provider,
   } ->
   file { ['/var/lib/bacula',
