@@ -70,7 +70,7 @@ class bacula::client (
   if str2bool("$plugin_dir") {
     $fd_plugin_dir = $plugin_dir
   } else {
-    $fd_plugin_dir = $architecture {
+    $fd_plugin_dir = $architecture ? {
       'x86_64' => '/usr/lib64/bacula',
       default  => '/usr/lib/bacula',
     }
