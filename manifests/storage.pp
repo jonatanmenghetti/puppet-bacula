@@ -42,8 +42,8 @@ class bacula::storage(
     $db_backend = 'mysql',
     $director_server,
     $director_password,
-    $storage_server,
-    $storage_package = '',
+    $storage_name = $fqdn,
+    $package = 'bacula-storage',
     $mysql_package = 'mysql',
     $pgsql_package = 'postgresql',
     $storage_conf = '/etc/bacula/bacula-sd.conf',
@@ -62,21 +62,23 @@ class bacula::storage(
     'pgsql' => $pgsql_package,
   }
 
-  package {$storage_package:
-    ensure    => latest,
-    provider  => $package_provider,
-  } ->
-  file { ['/var/lib/bacula',
-          '/var/run/bacula']:
-    ensure => directory,
-    owner => 'bacula',
-    group => 'bacula',
-    before => Service [$storage_package],
-  } ~>
-  service { $service_name:
-    ensure  => running,
-    enable  => true,
-    require => Package [$storage_package],
+  if $manage_package {
+    package {$storage_package:
+      ensure    => latest,
+      provider  => $package_provider,
+    } ->
+    file { ['/var/lib/bacula',
+            '/var/run/bacula']:
+      ensure => directory,
+      owner => 'bacula',
+      group => 'bacula',
+      before => Service [$storage_package],
+    } ~>
+    service { $service_name:
+      ensure  => running,
+      enable  => true,
+      require => Package [$storage_package],
+    }
   }
 
   file { $storage_conf:
