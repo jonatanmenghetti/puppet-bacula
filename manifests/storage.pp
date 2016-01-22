@@ -72,7 +72,7 @@ class bacula::storage(
       ensure => directory,
       owner => 'bacula',
       group => 'bacula',
-      before => Service [$storage_package],
+      before => Service [$service_name],
     } ~>
     service { $service_name:
       ensure  => running,
