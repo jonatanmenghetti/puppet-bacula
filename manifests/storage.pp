@@ -40,7 +40,7 @@
 
 class bacula::storage(
     $db_backend = 'mysql',
-    $director_name,
+    $director,
     $director_password,
     $storage_name = $fqdn,
     $package = 'bacula-storage',
