@@ -3,6 +3,13 @@ class bacula::dir (
   $manage_clients = true,
 ) {
 
+  file { ['/etc/bacula/conf.d/Clients',
+          '/etc/bacula/conf.d/Storages']:
+    ensure => directory,
+    owner => 'bacula',
+    group => 'bacula',
+  }
+
   if $manage_clients {
     File <<| tag == "baculaclient" |>>
   }
