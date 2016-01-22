@@ -77,15 +77,15 @@ class bacula::storage(
     service { $service_name:
       ensure  => running,
       enable  => true,
-      require => Package [$storage_package],
+      require => Package [$package],
     }
   }
 
   file { $storage_conf:
     ensure  => file,
     content => template($template),
-    notify  => Service [$storage_package],
-    require => Package [$storage_package],
+    notify  => Service [$service_name],
+    require => Package [$package],
   }
 
 }
