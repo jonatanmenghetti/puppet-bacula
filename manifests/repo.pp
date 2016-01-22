@@ -7,6 +7,10 @@ class bacula::repo (
   $version           = 5,
 ) {
 
+  if !(defined(Class['bacula'])) {
+      fail('You must include the bacula base class before using any bacula defined resources')
+  }
+
   if $version == 7 {
     yumrepo { 'epel-bacula7':
       descr => 'Bacula backports from rawhide',
