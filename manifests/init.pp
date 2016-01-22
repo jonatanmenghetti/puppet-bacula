@@ -35,10 +35,11 @@
 #
 # Copyright 2015 Your name here, unless otherwise noted.
 #
-class bacula {
+class bacula (
+    $version => 5,
+  ){
 
   class {'::bacula::repo':
     version => $repo_version,
   }
-
 }
