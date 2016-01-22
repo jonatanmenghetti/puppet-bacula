@@ -60,8 +60,8 @@ class bacula::client (
   $repo_version           = 5,
 ) {
 
-  class {'::bacula::repo':
-    version => $repo_version,
+  if !(defined(Class['bacula'])) {
+      fail('You must include the bacula base class before using any bacula defined resources')
   }
 
   $director_name_array  = split($director_server,'[.]')
