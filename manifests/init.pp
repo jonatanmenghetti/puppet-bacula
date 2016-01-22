@@ -37,5 +37,8 @@
 #
 class bacula {
 
+  class {'::bacula::repo':
+    version => $repo_version,
+  }
 
 }
