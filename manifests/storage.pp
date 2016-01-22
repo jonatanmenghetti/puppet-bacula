@@ -63,7 +63,7 @@ class bacula::storage(
   }
 
   if $manage_package {
-    package {$storage_package:
+    package {$package:
       ensure    => latest,
       provider  => $package_provider,
     } ->
