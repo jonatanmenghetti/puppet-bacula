@@ -68,7 +68,8 @@ class bacula::storage(
       provider  => $package_provider,
     } ->
     file { ['/var/lib/bacula',
-            '/var/run/bacula']:
+            '/var/run/bacula',
+            '/etc/bacula/bacula-sd.d']:
       ensure => directory,
       owner => 'bacula',
       group => 'bacula',
