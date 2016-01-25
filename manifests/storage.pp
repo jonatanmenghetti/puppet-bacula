@@ -51,6 +51,9 @@ class bacula::storage(
     $template = 'bacula/bacula-sd.conf.erb',
     $manage_package = false,
     $service_name = 'bacula-sd',
+    $bacula_storage_dir = '/etc/bacula/conf.d/Storages/',
+    $storage_address = $::fqdn,
+    $port = '9103',
 ) {
 
   if !(defined(Class['bacula'])) {
@@ -87,6 +90,15 @@ class bacula::storage(
     content => template($template),
     notify  => Service [$service_name],
     require => Package [$package],
+  }
+
+  if $is_exported {
+    @@file { "$storage_name.conf":
+      path => "$bacula_storage_dir/$storage_name.conf",
+      content => template($dir_client_template),
+      tag => 'baculastorage',
+      notify => Exec['breload'],
+    }
   }
 
 }
