@@ -93,12 +93,15 @@ class bacula::storage(
   }
 
   if $is_exported {
-    @@file { "$storage_name.conf":
-      path => "$bacula_storage_dir/$storage_name.conf",
+
+    @@concat::fragment {"device_${storage_name}":
+      target => "$bacula_storage_dir/$storage_name.conf",
       content => template($dir_client_template),
-      tag => 'baculastorage',
+      tag => 'baculastorage'
       notify => Exec['breload'],
+      order => 2
     }
+
   }
 
 }

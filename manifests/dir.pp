@@ -14,6 +14,10 @@ class bacula::dir (
     File <<| tag == "baculaclient" |>>
   }
 
+  if $manage_storages {
+    concat::fragment <<|tag == "baculastorage" |>>
+  }
+
   exec {'breload':
     command => '/bin/echo "reload" | /sbin/bconsole',
     refreshonly => true,
