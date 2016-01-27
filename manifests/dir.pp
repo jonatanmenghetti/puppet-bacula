@@ -15,7 +15,7 @@ class bacula::dir (
   }
 
   if $manage_storages {
-    concat::fragment <<|tag == "baculastorage" |>>
+    Concat::Fragment <<|tag == "baculastorage" |>>
   }
 
   exec {'breload':
