@@ -12,17 +12,23 @@ define bacula::storage::dev (
   $storage_device_dir       = '/etc/bacula/bacula-sd.d',
   $storage_device_template  = 'bacula/storage/devices.conf.erb'
 ){
-  
+
+  file { "$storage_device_dir":
+    ensure => 'directory',
+    group  => 'bacula',
+    owner  => 'bacula',
+    mode   => '755',
+  }
+
   concat { "dev_${name}":
     owner => 'bacula',
     group => 'bacula',
     mode  => '0644'
   }
 
-  concat::fragment {"dev_${name}":
+  concat::fragment { "dev_${name}":
     target => "$storage_device_dir/device_${name}.conf",
     content => template($storage_device_template),
-    tag => 'baculastorage',
     order => 1
   }
 
