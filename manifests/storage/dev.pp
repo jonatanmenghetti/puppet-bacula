@@ -22,7 +22,7 @@ define bacula::storage::dev (
   concat::fragment { "dev_${name}":
     target => "$storage_device_dir/device_${name}.conf",
     content => template($storage_device_template),
-    order => 1
+    order => 1,
     notify => Service['bacula-sd'],
   }
 }
