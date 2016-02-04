@@ -48,7 +48,7 @@ define bacula::storage::dev (
     @@concat { "${bacula_storage_dir}/${storage_name}.conf":
       owner => 'bacula',
       group => 'bacula',
-      mode  => '0644'
+      mode  => '0644',
       tag => 'baculastorage',
     }
 
