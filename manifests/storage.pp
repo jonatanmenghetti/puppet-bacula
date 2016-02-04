@@ -94,7 +94,7 @@ class bacula::storage(
     require => Package [$package],
   }
 
-  if $exported {
+  if $exporte {
     @@concat::fragment {"stgdev_${storage_name}":
       target => "$bacula_storage_dir/$storage_name.conf",
       content => template($dir_client_template),
