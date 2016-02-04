@@ -9,11 +9,11 @@ define bacula::storage::dev (
   $mountpoint               = undef,
   $mountcmmd                = "/bin/mount %m",
   $unmountcmmd              = "/bin/umount %m",
-  $storage_device_dir       = '/etc/bacula/bacula-sd.d',
+  $storage_device_dir       = '/etc/bacula/bacula-sd.d/',
   $storage_device_template  = 'bacula/storage/devices.conf.erb'
 ){
 
-  concat { "dev_${name}":
+  concat { "${storage_device_dir}/device_${name}.conf":
     owner => 'bacula',
     group => 'bacula',
     mode  => '0644'
