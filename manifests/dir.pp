@@ -16,6 +16,7 @@ class bacula::dir (
   }
 
   if $manage_storages {
+    Concat <<|tag == "baculastorage" |>>
     Concat::Fragment <<|tag == "baculastorage" |>>
   }
 

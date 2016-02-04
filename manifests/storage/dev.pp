@@ -44,6 +44,14 @@ define bacula::storage::dev (
   }
 
   if $exporte {
+
+    @@concat { "${bacula_storage_dir}/${storage_name}.conf":
+      owner => 'bacula',
+      group => 'bacula',
+      mode  => '0644'
+      tag => 'baculastorage',
+    }
+
     @@concat::fragment {"stgdev_${storage_name}":
       target => "$bacula_storage_dir/$storage_name.conf",
       content => template($dir_storage_template),
