@@ -52,9 +52,9 @@ class bacula::storage(
     $manage_package       = false,
     $service_name         = 'bacula-sd',
     $bacula_storage_dir   = '/etc/bacula/conf.d/Storages/',
-    $storage_address = $::fqdn,
-    $port = '9103',
-    $devices = undef,
+    $storage_address      = $::fqdn,
+    $port                 = '9103',
+    $devices              = undef,
 ) {
 
   if !(defined(Class['bacula'])) {

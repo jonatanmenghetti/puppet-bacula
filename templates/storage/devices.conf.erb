@@ -4,15 +4,16 @@
 
 # Configure the Director which will manage this Storage Daemon, and the
 # Director through which we'll send our messages (will be the same) one.
+
 Device {
-  Name = "<%= device_name -%>"
-  Media Type = "<%= media_type -%>"
-  Archive Device = "<%= archive_device -%>"
-  LabelMedia = "yes"
-  Requires Mount = "<%= requires_mount -%>"
-  AutomaticMount = "<%= automatic_mount -%>"
-  Mount Point = "<%= mount_point -%>"
-  Mount Command = "<%= mount_dommand -%>"
-  Unmount Command = "<%= unmount_command -%>"
+  Name = "<%= name -%>"
+  Media Type = "<%= type -%>"
+  Archive Device = "<%= device -%>"
+  LabelMedia = "<%= label -%>"
+  Requires Mount = "<%= requiremount -%>"
+  AutomaticMount = "<%= automount -%>"
+  Mount Point = "<%= mountpoint -%>"
+  Mount Command = "<%= mountcmmd -%>"
+  Unmount Command = "<%= unmountcmmd -%>"
   RemovableMedia  = "<%removable_media -%>"
 }
