@@ -13,13 +13,6 @@ define bacula::storage::dev (
   $storage_device_template  = 'bacula/storage/devices.conf.erb'
 ){
 
-  file { "$storage_device_dir":
-    ensure => 'directory',
-    group  => 'bacula',
-    owner  => 'bacula',
-    mode   => '755',
-  }
-
   concat { "dev_${name}":
     owner => 'bacula',
     group => 'bacula',
