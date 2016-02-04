@@ -19,7 +19,7 @@ define bacula::storage::dev (
   $director_password = getparam(Class['bacula::storage'],"director_password")
   $storage_name = getparam(Class['bacula::storage'],"storage_name")
   $console_password = getparam(Class['bacula::storage'],"console_password")
-  $template = getparam(class['bacula::storage'],"template")
+  $template = getparam(Class['bacula::storage'],"template")
   $dir_storage_template = getparam(Class['bacula::storage'],"dir_storage_template")
   $service_name = getparam(Class['bacula::storage'],"service_name")
   $bacula_storage_dir = getparam(Class['bacula::storage'],"bacula_storage_dir")
