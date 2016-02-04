@@ -59,6 +59,8 @@ class bacula::storage(
     $exporte              = true,
 ) {
 
+  include stdlib
+
   if !(defined(Class['bacula'])) {
 		  fail('You must include the bacula base class before using any bacula defined resources')
 	}
@@ -93,17 +95,6 @@ class bacula::storage(
     content => template($template),
     notify  => Service [$service_name],
     require => Package [$package],
-  }
-
-  if $exporte {
-    @@concat::fragment {"stgdev_${storage_name}":
-      target => "$bacula_storage_dir/$storage_name.conf",
-      content => template($dir_storage_template),
-      tag => 'baculastorage',
-      order => 2,
-      notify => Exec['breload'],
-    }
-
   }
 
 }
