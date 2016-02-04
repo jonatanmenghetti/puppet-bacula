@@ -14,19 +14,19 @@ define bacula::storage::dev (
 ){
   include stdlib
 
-  $storage_conf = getparam(class['bacula::storage'],"storage_conf");
-  $director = getparam(class['bacula::storage'],"director");
-  $director_password = getparam(class['bacula::storage'],"director_password");
-  $storage_name = getparam(class['bacula::storage'],"storage_name");
-  $console_password = getparam(class['bacula::storage'],"console_password");
+  $storage_conf = getparam(Class['bacula::storage'],"storage_conf");
+  $director = getparam(Class['bacula::storage'],"director");
+  $director_password = getparam(Class['bacula::storage'],"director_password");
+  $storage_name = getparam(Class['bacula::storage'],"storage_name");
+  $console_password = getparam(Class['bacula::storage'],"console_password");
   $template = getparam(class['bacula::storage'],"template");
-  $dir_storage_template = getparam(class['bacula::storage'],"dir_storage_template");
-  $service_name = getparam(class['bacula::storage'],"service_name");
-  $bacula_storage_dir = getparam(class['bacula::storage'],"bacula_storage_dir");
-  $storage_address = getparam(class['bacula::storage'],"storage_address");
-  $port = getparam(class['bacula::storage'],"port");
-  $devices = getparam(class['bacula::storage'],"devices");
-  $exporte = getparam(class['bacula::storage'],"exporte");
+  $dir_storage_template = getparam(Class['bacula::storage'],"dir_storage_template");
+  $service_name = getparam(Class['bacula::storage'],"service_name");
+  $bacula_storage_dir = getparam(Class['bacula::storage'],"bacula_storage_dir");
+  $storage_address = getparam(Class['bacula::storage'],"storage_address");
+  $port = getparam(Class['bacula::storage'],"port");
+  $devices = getparam(Class['bacula::storage'],"devices");
+  $exporte = getparam(Class['bacula::storage'],"exporte");
 
   concat { "${storage_device_dir}/device_${name}.conf":
     owner => 'bacula',
