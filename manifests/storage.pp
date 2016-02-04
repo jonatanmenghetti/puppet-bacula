@@ -100,6 +100,7 @@ class bacula::storage(
       content => template($dir_client_template),
       tag => 'baculastorage',
       order => 2
+      notify => Exec['breload'],
     }
 
   }
