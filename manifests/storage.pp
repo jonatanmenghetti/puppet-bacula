@@ -55,6 +55,7 @@ class bacula::storage(
     $storage_address      = $::fqdn,
     $port                 = '9103',
     $devices              = undef,
+    $exporte              = true,
 ) {
 
   if !(defined(Class['bacula'])) {
@@ -93,8 +94,7 @@ class bacula::storage(
     require => Package [$package],
   }
 
-  if $is_exported {
-
+  if $exported {
     @@concat::fragment {"device_${storage_name}":
       target => "$bacula_storage_dir/$storage_name.conf",
       content => template($dir_client_template),
