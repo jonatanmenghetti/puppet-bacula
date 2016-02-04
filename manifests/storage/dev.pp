@@ -27,7 +27,7 @@ define bacula::storage::dev (
   $port = getparam(Class['bacula::storage'],"port")
   $devices = getparam(Class['bacula::storage'],"devices")
   $exporte = getparam(Class['bacula::storage'],"exporte")
-  $exporte = getparam(Class['bacula::storage'],"concurrent_jobs")
+  $concurrent_jobs = getparam(Class['bacula::storage'],"concurrent_jobs")
 
 
   concat { "${storage_device_dir}/device_${name}.conf":
