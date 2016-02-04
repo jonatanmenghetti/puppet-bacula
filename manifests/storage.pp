@@ -49,6 +49,7 @@ class bacula::storage(
     $storage_conf         = '/etc/bacula/bacula-sd.conf',
     $console_password     = undef,
     $template             = 'bacula/bacula-sd.conf.erb',
+    $dir_storage_template = 'bacula/storage/director.conf.erb',
     $manage_package       = false,
     $service_name         = 'bacula-sd',
     $bacula_storage_dir   = '/etc/bacula/conf.d/Storages/',
@@ -97,7 +98,7 @@ class bacula::storage(
   if $exporte {
     @@concat::fragment {"stgdev_${storage_name}":
       target => "$bacula_storage_dir/$storage_name.conf",
-      content => template($dir_client_template),
+      content => template($dir_storage_template),
       tag => 'baculastorage',
       order => 2,
       notify => Exec['breload'],
