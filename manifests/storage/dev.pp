@@ -5,7 +5,7 @@ define bacula::storage::dev (
   $requiremount             = 'yes',
   $automount                = 'yes',
   $label                    = 'yes',
-  $removible                = "yes",
+  $removable                = "yes",
   $mountpoint               = undef,
   $mountcmmd                = "/bin/mount %m",
   $unmountcmmd              = "/bin/umount %m",
