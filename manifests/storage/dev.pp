@@ -14,12 +14,11 @@ define bacula::storage::dev (
 ){
 
 
-  concat::fragment {"device_${name}":
+  concat::fragment {"dev_${name}":
     target => "$storage_device_dir/device_${name}.conf",
     content => template($storage_device_template),
     tag => 'baculastorage',
-    notify => Exec['breload'],
-    order => 2
+    order => 1
   }
 
 
