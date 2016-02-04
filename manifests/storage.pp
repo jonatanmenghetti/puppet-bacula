@@ -39,21 +39,22 @@
 # }
 
 class bacula::storage(
-    $db_backend = 'mysql',
-    $director,
-    $director_password,
-    $storage_name = $fqdn,
-    $package = 'bacula-storage',
-    $mysql_package = 'mysql',
-    $pgsql_package = 'postgresql',
-    $storage_conf = '/etc/bacula/bacula-sd.conf',
-    $console_password,
-    $template = 'bacula/bacula-sd.conf.erb',
-    $manage_package = false,
-    $service_name = 'bacula-sd',
-    $bacula_storage_dir = '/etc/bacula/conf.d/Storages/',
+    $db_backend           = 'mysql',
+    $director             = undef,
+    $director_password    = undef,
+    $storage_name         = $fqdn,
+    $package              = 'bacula-storage',
+    $mysql_package        = 'mysql',
+    $pgsql_package        = 'postgresql',
+    $storage_conf         = '/etc/bacula/bacula-sd.conf',
+    $console_password     = undef,
+    $template             = 'bacula/bacula-sd.conf.erb',
+    $manage_package       = false,
+    $service_name         = 'bacula-sd',
+    $bacula_storage_dir   = '/etc/bacula/conf.d/Storages/',
     $storage_address = $::fqdn,
     $port = '9103',
+    $devices = undef,
 ) {
 
   if !(defined(Class['bacula'])) {
@@ -98,7 +99,7 @@ class bacula::storage(
       target => "$bacula_storage_dir/$storage_name.conf",
       content => template($dir_client_template),
       tag => 'baculastorage'
-      notify => Exec['breload'],
+      # notify => Exec['breload'],
       order => 2
     }
 
