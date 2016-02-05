@@ -6,7 +6,7 @@
 
 # Configure the basic details for the Storage Daemon on this server
 Storage {
-  Name = <%= storage_name -%>
+  Name = <%= storage_name %>
   SDPort = <%= port %>
   Working Directory = "/var/lib/bacula"
   PID Directory = "/var/run/bacula"
@@ -17,12 +17,12 @@ Storage {
 # Director through which we'll send our messages (will be the same) one.
 Director {
   Name = <%= director %>
-  Password = "<%= director_password -%>"
+  Password = "<%= director_password %>"
 }
 
 Messages {
-  Name = "<%= storage_name -%>:messages:standard"
-  Director = "<%= director -%>:director" = all
+  Name = "<%= director -%>:standard"
+  Director = "<%= director %>" = all
 }
 
 # All other Devices are created by the clients that need them - each will
