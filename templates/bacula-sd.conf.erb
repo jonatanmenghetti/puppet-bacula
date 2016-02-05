@@ -19,7 +19,7 @@ Messages {
 # Configure the basic details for the Storage Daemon on this server
 Storage {
   Name = "<%= storage_name -%>:storage"
-  Port = "<%= port -%>"
+  SDPort = <%= port -%>
   Working Directory = "/var/lib/bacula"
   PID Directory = "/var/run/bacula"
   Maximum Concurrent Jobs = <%= concurrent_jobs -%>
