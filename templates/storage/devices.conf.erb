@@ -6,14 +6,14 @@
 # Director through which we'll send our messages (will be the same) one.
 
 Device {
-  Name = "<%=storage_name %>:<%= name %>"
-  Media Type = "<%= mediatype -%>"
-  Archive Device = "<%= device -%>"
-  LabelMedia = "<%= label -%>"
-  Requires Mount = "<%= requiremount -%>"
-  AutomaticMount = "<%= automount -%>"
-  Mount Point = "<%= mountpoint -%>"
-  Mount Command = "<%= mountcmmd -%>"
-  Unmount Command = "<%= unmountcmmd -%>"
-  RemovableMedia  = "<%= removable -%>"
+  Name = <%=name%>
+  Media Type = <%=mediatype%>
+  Archive Device = <%=device%>
+  LabelMedia = <%=label%>
+  Requires Mount = <%=requiremount%>
+  AutomaticMount = <%=automount%>
+  Mount Point = <%=mountpoint%>
+  Mount Command = "<%=mountcmmd%>"
+  Unmount Command = "<%=unmountcmmd%>"
+  RemovableMedia  = "<%=removable%>"
 }
