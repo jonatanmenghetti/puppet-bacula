@@ -62,9 +62,6 @@ class bacula::storage(
 
   include stdlib
 
-  $storage_name_array  = split($storage_name,'[.]')
-  $storage_pre_name        = $storage_name_array[0]
-
   if !(defined(Class['bacula'])) {
 		  fail('You must include the bacula base class before using any bacula defined resources')
 	}
