@@ -25,13 +25,6 @@ Storage {
   Maximum Concurrent Jobs = <%= concurrent_jobs -%>
 }
 
-# Also configure access for something to monitor this Storage Daemon
-Director {
-  Name = "<%= storage_name -%>:monitor"
-  Password = "<%= console_password -%>"
-  Monitor = Yes
-}
-
 # All other Devices are created by the clients that need them - each will
 # prepare their own device and pool configuration, which will then be
 # saved under /etc/bacula/bacula-sd.d and imported by the following line:
