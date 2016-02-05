@@ -57,7 +57,7 @@ class bacula::storage(
     $port                 = '9103',
     $devices              = undef,
     $exporte              = true,
-    $concurrent_jobs      = '4',
+    $concurrent_jobs      = '6',
 ) {
 
   include stdlib
