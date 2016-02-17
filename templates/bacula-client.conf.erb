@@ -16,6 +16,7 @@ Client {
 }
 
 <% @jobs.sort_by {|key, value| key}.each do |key,value| -%>
+<% if value.Pool != "" -%>
 Job {
   Name = "<%= clientname -%>:<%=key-%>"
   Client = "<%= clientname -%>:fd"
@@ -23,4 +24,5 @@ Job {
   <%=jobkey-%>      = "<%=jobvalue%>"
 <% end -%>
 }
+<%- end -%>
 <% end %>
