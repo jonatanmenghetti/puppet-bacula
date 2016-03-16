@@ -58,6 +58,7 @@ class bacula::client (
   $clientname             = $::fqdn,
   $port                   = 9102,
   $repo_version           = 5,
+  $manage_firewall        = true,
 ) {
 
   if !(defined(Class['bacula'])) {
@@ -98,6 +99,14 @@ class bacula::client (
     content => template($client_conf_template),
     notify  => Service [$client_service],
     require => Package [$client_package],
+  }
+
+  if $manage_firewall {
+    firewall { '200 Bacula':
+      dport   => $port,
+      proto  => tcp,
+      action => accept,
+    }
   }
 
   if $is_exported {
