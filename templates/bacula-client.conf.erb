@@ -15,7 +15,7 @@ Client {
   Catalog = "<%= catalog %>"
 }
 
-<% if jobs %>
+<% if jobs != '' %>
 <% @jobs.sort_by {|key, value| key}.each do |key,value| -%>
 <% if value["Pool"] != "" -%>
 Job {
