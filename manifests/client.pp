@@ -59,6 +59,7 @@ class bacula::client (
   $port                   = 9102,
   $repo_version           = 5,
   $manage_firewall        = true,
+  $ensure                 = file,
 ) {
 
   if !(defined(Class['bacula'])) {
@@ -115,6 +116,7 @@ class bacula::client (
       content => template($dir_client_template),
       tag => 'baculaclient',
       notify => Exec['breload'],
+      ensure => $ensure
     }
   }
 }
