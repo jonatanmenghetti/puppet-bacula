@@ -110,8 +110,6 @@ class bacula::client (
     }
   }
 
-  notice($ensure)
-
   if $is_exported {
     @@file { "$clientname.conf":
       path => "$bacula_clients_dir/$clientname.conf",
