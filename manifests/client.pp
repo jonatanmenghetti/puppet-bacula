@@ -1,4 +1,4 @@
-# Class: bacula::client
+# class bacula::client
 #
 # This class manage the bacula client (client-fd)
 #
@@ -36,30 +36,27 @@
 #   director_password => 'XXXXXXXXXX',
 #   client_package    => 'bacula-client',
 # }
-
 class bacula::client (
-  $client_conf            = '/etc/bacula/bacula-fd.conf',
-  $client_conf_template   = 'bacula/bacula-fd.conf.erb',
-  $bacula_clients_dir     = '/etc/bacula/conf.d/Clients',
-  $dir_client_template    = 'bacula/bacula-client.conf.erb',
-  $client_package         = 'bacula-client',
-  $client_service         = 'bacula-fd',
-  $director_password      = undef,
-  $director_server        = undef,
-  $package_provider       = undef,
-  $pid_dir                = '/var/run/bacula',
-  $working_dir            = '/var/lib/bacula',
+  $client_conf            = undef,
+  $client_conf_template   = undef,
+  $bacula_clients_dir     = undef,
+  $dir_client_template    = undef,
+  $client_package         = undef,
+  $client_service         = undef,
+  $director_password,
+  $director_server,
+  $pid_dir                = undef,
+  $working_dir            = undef,
   $plugin_dir             = undef,
-  $max_jobs               = 3,
-  $jobs                   = undef,
-  $hostname               = $::ipaddress,
-  $catalog                = undef,
-  $is_exported            = false,
-  $clientname             = $::fqdn,
-  $port                   = 9102,
-  $repo_version           = 5,
-  $manage_firewall        = true,
-  $config_ensure          = file,
+  $max_jobs               = undef,
+  $jobs                   = {},
+  $hostname               = ,
+  $catalog,
+  $is_exported            = undef,
+  $clientname             = undef,
+  $port                   = undef,
+  $manage_firewall        = undef,
+  $config_ensure          = undef,
 ) {
 
   if !(defined(Class['bacula'])) {
@@ -69,24 +66,23 @@ class bacula::client (
   $director_name_array  = split($director_server,'[.]')
   $director_name        = $director_name_array[0]
 
-  if str2bool("$plugin_dir") {
+  if str2bool($plugin_dir) {
     $fd_plugin_dir = $plugin_dir
   } else {
-    $fd_plugin_dir = $architecture ? {
+    $fd_plugin_dir = $::architecture ? {
       'x86_64' => '/usr/lib64/bacula',
       default  => '/usr/lib/bacula',
     }
   }
 
   package {$client_package:
-    ensure    => latest,
-    provider  => $package_provider,
+    ensure   => latest,
   } ->
   file { ['/var/lib/bacula',
           '/var/run/bacula']:
     ensure => directory,
-    owner => 'bacula',
-    group => 'bacula',
+    owner  => 'bacula',
+    group  => 'bacula',
     before => Service [$client_service],
   } ~>
   service { $client_service:
@@ -104,19 +100,19 @@ class bacula::client (
 
   if $manage_firewall {
     firewall { '200 Bacula':
-      dport   => $port,
+      dport  => $port,
       proto  => tcp,
       action => accept,
     }
   }
 
   if $is_exported {
-    @@file { "$clientname.conf":
-      path => "$bacula_clients_dir/$clientname.conf",
+    @@file { "${clientname}.conf":
+      ensure  => $config_ensure,
+      path    => "${bacula_clients_dir}/${clientname}.conf",
       content => template($dir_client_template),
-      tag => 'baculaclient',
-      notify => Exec['breload'],
-      ensure => $config_ensure
+      tag     => 'baculaclient',
+      notify  => Exec['breload'],
     }
   }
 }

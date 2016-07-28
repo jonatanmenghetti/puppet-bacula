@@ -1,0 +1,6 @@
+:hierarchy:
+  - osfamily/%{::osfamily}/%{::operatingsystem}/%{::operatingsystemmajrelease}
+  - osfamily/%{::osfamily}/%{::operatingsystem}
+  - osfamily/%{::osfamily}/%{::osfamily}
+  - osfamily/%{::osfamily}
+  - common
