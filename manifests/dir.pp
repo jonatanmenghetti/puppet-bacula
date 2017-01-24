@@ -7,9 +7,10 @@ class bacula::dir (
 
   file { [$bacula_clients_dir,
           $bacula_storages_dir]:
+    force  => yes,
     ensure => directory,
-    owner => 'bacula',
-    group => 'bacula',
+    owner  => 'bacula',
+    group  => 'bacula',
   }
 
   if $manage_clients {
