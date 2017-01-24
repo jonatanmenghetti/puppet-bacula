@@ -15,3 +15,5 @@ bacula::client::is_exported: false
 bacula::client::clientname: %{::fqdn}
 bacula::client::port: 9102
 bacula::client::manage_firewall: true
+bacula::user: bacula
+bacula::group: bacula
