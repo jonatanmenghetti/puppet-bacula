@@ -16,9 +16,10 @@
 ## Overview
 
 Este modulo foi criado para autoconfigurar o bacula nos clientes através do
-puppet. As configurações são baseadas nas configurações já existentes.
-Testado:
-CentOS
+puppet. 
+
+**Testado**:
+- CentOS
 
 ## Descrição do Módulo
 
@@ -26,27 +27,25 @@ Este módulo configura os clientes e servidores do Bacula 7. Cria arquivos de
 Configurações para cada sessão como JobDefs, Schedule.
 
 ## Setup
-cd /etc/puppet/modules git clone http://gitlab.unimestre.com/puppet/bacula.git
+cd /etc/puppet/modules git clone https://github.com/jonatanmenghetti/puppet-bacula.git
 
 ### What bacula affects
 
-* Irá afetar a configurações existentes do bacula-fd
+* Irá afetar a configurações existentes do bacula-fd, bacula-sd e bacula-client
 
 ## Usage
 
-Put the classes, types, and resources for customizing, configuring, and doing
-the fancy stuff with your module here.
+class {'bacula::dir':
 
-## Reference
+}
 
-Here, list the classes, types, providers, facts, etc contained in your module.
-This section should include all of the under-the-hood workings of your module so
-people know what the module is touching on their system but don't need to mess
-with things. (We are working on automating this section!)
 
 ## Limitations
 
 This is where you list OS compatibility, version compatibility, etc.
+
+Compatible with linux Versions: 
+- CentOS 7
 
 ## Development
 
