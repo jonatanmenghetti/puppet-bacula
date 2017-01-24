@@ -1,5 +1,5 @@
 class bacula::dir (
-  $bacula_clients_dir     = '/etc/bacula/conf.d/Clients',
+  $bacula_clients_dir     = '/etc/bacula/conf.d/clients',
   $manage_clients         = true,
   $manage_storages        = true,
 ) {
