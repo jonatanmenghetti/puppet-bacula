@@ -1,11 +1,12 @@
 class bacula::dir (
   $bacula_clients_dir     = '/etc/bacula/conf.d/clients',
+  $bacula_storages_dir     = '/etc/bacula/conf.d/storages',
   $manage_clients         = true,
   $manage_storages        = true,
 ) {
 
-  file { ['/etc/bacula/conf.d/Clients',
-          '/etc/bacula/conf.d/Storages']:
+  file { [$bacula_clients_dir,
+          $bacula_storages_dir]:
     ensure => directory,
     owner => 'bacula',
     group => 'bacula',
