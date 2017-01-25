@@ -4,6 +4,7 @@ bacula::user: bacula
 bacula::group: bacula
 bacula::version: 7
 bacula::conf_base_dir: '/etc/bacula'
+bacula::working_directory: /opt/bacula/working
 bacula::default_conf_dir: conf.d
 bacula::bacula_clients_dir: clients
 bacula::bacula_storages_dir: storages
@@ -17,7 +18,6 @@ bacula::dir::manage_storages: true
 bacula::dir::port: 9101
 bacula::dir::config_file: bacula-dir.conf
 bacula::dir::query_file: /etc/bacula/script/query.sql
-bacula::dir::working_directory: /opt/bacula/working
 bacula::dir::pid_directory: /var/run
 bacula::dir::concurrent_jobs: 3
 bacula::dir::message: Daemon

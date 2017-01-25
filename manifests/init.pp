@@ -46,7 +46,7 @@ class bacula (
     $bacula_schedule_dir = undef,
     $bacula_filesets_dir = undef,
     $manage_repositorie  = undef,
-
+    $working_directory   = undef,
   ){
 
   include stdlib
@@ -55,6 +55,16 @@ class bacula (
     class {'::bacula::repo':
       version => $version,
     }
+  }
+
+  exec{"mkdir -p ${working_directory}":
+    path => $::path,
+  }->
+  file {$working_directory:
+    ensure  => directory,
+    recurse => true,
+    owner   => $bacula_user,
+    group   => $bacula_group,
   }
 
 }

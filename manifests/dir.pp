@@ -5,7 +5,6 @@ class bacula::dir (
   $package_name           = undef,
   $port                   = undef,
   $query_file             = undef,
-  $working_directory      = undef,
   $pid_directory          = undef,
   $concurrent_jobs        = undef,
   $message                = undef,
@@ -21,7 +20,6 @@ class bacula::dir (
     fail('You must include the bacula base class before using any bacula defined resources')
   }
 
-  $bacula_version       = getparam(Class['bacula'],'version')
   $bacula_user          = getparam(Class['bacula'],'user')
   $bacula_group         = getparam(Class['bacula'],'group')
   $conf_base_dir        = getparam(Class['bacula'],'conf_base_dir')
@@ -30,6 +28,7 @@ class bacula::dir (
   $_bacula_storages_dir = getparam(Class['bacula'],'bacula_storages_dir')
   $_bacula_schedule_dir = getparam(Class['bacula'],'bacula_schedule_dir')
   $_bacula_filesets_dir = getparam(Class['bacula'],'bacula_filesets_dir')
+  $working_directory    = getparam(Class['bacula'],'working_directory')
 
   $default_conf_dir     = "${conf_base_dir}/${_default_conf_dir}"
   $bacula_clients_dir   = "${default_conf_dir}/${_bacula_clients_dir}"
@@ -38,15 +37,15 @@ class bacula::dir (
   $bacula_filesets_dir  = "${default_conf_dir}/${_bacula_filesets_dir}"
   $dir_config_file      = "${conf_base_dir}/${config_file}"
 
-  $full_job_defs_file  =  "${default_conf_dir}/${job_defs_file}"
-
   package { $package_name:
     ensure => installed,
   }
   
   file { [$default_conf_dir,
           $bacula_clients_dir,
-          $bacula_storages_dir]:
+          $bacula_storages_dir,
+          $bacula_schedule_dir,
+          $bacula_filesets_dir]:
     ensure  => directory,
     recurse => true,
     owner   => $bacula_user,
@@ -71,6 +70,46 @@ class bacula::dir (
   if str2bool($manage_storages) {
     Concat <<|tag == 'baculastorage' |>>
     Concat::Fragment <<|tag == 'baculastorage' |>>
+  }
+
+  concat { "${default_conf_dir}/Catalogs.conf":
+    ensure => present
+  }
+
+  concat::fragment {"Catalogs.conf-header":
+    target  => "${default_conf_dir}/Catalogs.conf",
+    content => template('bacula/header.conf.erb'),
+    order   => '0'
+  }
+
+  concat { "${default_conf_dir}/JobDefs.conf":
+    ensure => present
+  }
+
+  concat::fragment {"JobDefs.conf-header":
+    target  => "${default_conf_dir}/JobDefs.conf",
+    content => template('bacula/header.conf.erb'),
+    order   => '0'
+  }
+
+  concat { "${default_conf_dir}/Pools.conf":
+    ensure => present
+  }
+
+  concat::fragment {"Pools.conf-header":
+    target  => "${default_conf_dir}/Pools.conf",
+    content => template('bacula/header.conf.erb'),
+    order   => '0'
+  }
+
+  concat { "${default_conf_dir}/Messages.conf":
+    ensure => present
+  }
+
+  concat::fragment {"Messages.conf-header":
+    target  => "${default_conf_dir}/Messages.conf",
+    content => template('bacula/header.conf.erb'),
+    order   => '0'
   }
 
   exec {'breload':

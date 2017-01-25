@@ -31,16 +31,16 @@
 #
 # Sample Usage:
 #
-# class { 'bacula::client':
+# bacula::client {$::fqdn:
 #   director_server   => 'bacula.domain.com',
 #   director_password => 'XXXXXXXXXX',
 #   client_package    => 'bacula-client',
 # }
-class bacula::client (
+define bacula::client (
   $director_password,
   $director_server,
   $catalog,
-  $hostname               = undef,
+  $hostname               = $title,
   $client_conf            = undef,
   $client_conf_template   = undef,
   $bacula_clients_dir     = undef,

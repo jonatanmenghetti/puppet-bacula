@@ -21,7 +21,7 @@ Director {
 @|"sh -c 'for f in <%= @bacula_schedule_dir -%>/*.conf ; do echo @${f} ; done'"
 @|"sh -c 'for f in <%= @bacula_filesets_dir -%>/*.conf ; do echo @${f} ; done'"
 
+@<%= @default_conf_dir -%>/Catalogs.conf
 @<%= @default_conf_dir -%>/JobDefs.conf
 @<%= @default_conf_dir -%>/Pools.conf
-@<%= @default_conf_dir -%>//Catalogs.conf
 @<%= @default_conf_dir -%>/Messages.conf
