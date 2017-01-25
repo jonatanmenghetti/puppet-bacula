@@ -1,0 +1,16 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "0.1.0",
+    "command": "rsync",
+    "isShellCommand": true,
+    "args" : ["-rvupog","--delete-excluded","/home/jonatan/Documentos/puppet/modules/puppet-bacula/","root@puppet.mnztecnologia.com.br:/etc/puppetlabs/code/environments/production/modules/bacula/"],
+    "showOutput": "always",
+    "echoCommand": true,
+    "suppressTaskName": true,
+     "Tasks": [
+      {
+        "TaskName": "Sync",
+      }
+    ]
+}
