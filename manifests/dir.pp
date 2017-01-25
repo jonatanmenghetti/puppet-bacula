@@ -29,23 +29,21 @@ class bacula::dir (
   $_bacula_clients_dir  = getparam(Class['bacula'],'bacula_clients_dir')
   $_bacula_storages_dir = getparam(Class['bacula'],'bacula_storages_dir')
   $_bacula_schedule_dir = getparam(Class['bacula'],'bacula_schedule_dir')
+  $_bacula_filesets_dir = getparam(Class['bacula'],'bacula_filesets_dir')
 
   $default_conf_dir     = "${conf_base_dir}/${_default_conf_dir}"
   $bacula_clients_dir   = "${default_conf_dir}/${_bacula_clients_dir}"
   $bacula_storages_dir  = "${default_conf_dir}/${_bacula_storages_dir}"
   $bacula_schedule_dir  = "${default_conf_dir}/${_bacula_schedule_dir}"
+  $bacula_filesets_dir  = "${default_conf_dir}/${_bacula_filesets_dir}"
   $dir_config_file      = "${conf_base_dir}/${config_file}"
 
   $full_job_defs_file  =  "${default_conf_dir}/${job_defs_file}"
 
   package { $package_name:
     ensure => installed,
-  }->
-  service { $service_name:
-    ensure => running,
-    enable => true,
   }
-
+  
   file { [$default_conf_dir,
           $bacula_clients_dir,
           $bacula_storages_dir]:
@@ -53,20 +51,24 @@ class bacula::dir (
     recurse => true,
     owner   => $bacula_user,
     group   => $bacula_group,
-  }
-
+  }->
   file { $dir_config_file:
     ensure  => file,
     content => template($config_template),
     notify  => Service[$service_name],
     require => Package[$package_name],
+  }->
+  service { $service_name:
+    ensure => running,
+    enable => true,
   }
 
-  if $manage_clients {
+
+  if str2bool($manage_clients) {
     File <<| tag == 'baculaclient' |>>
   }
 
-  if $manage_storages {
+  if str2bool($manage_storages) {
     Concat <<|tag == 'baculastorage' |>>
     Concat::Fragment <<|tag == 'baculastorage' |>>
   }
@@ -75,4 +77,5 @@ class bacula::dir (
     command     => '/bin/echo "reload" | /sbin/bconsole',
     refreshonly => true,
   }
+  
 }

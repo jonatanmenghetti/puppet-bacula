@@ -1,4 +1,5 @@
 bacula::supported: false
+bacula::manage_repositorie: true
 bacula::user: bacula
 bacula::group: bacula
 bacula::version: 7
@@ -7,6 +8,7 @@ bacula::default_conf_dir: conf.d
 bacula::bacula_clients_dir: clients
 bacula::bacula_storages_dir: storages
 bacula::bacula_schedule_dir: schedules
+bacula::bacula_filesets_dir: filesets
 
 bacula::dir::package_name: 'bacula-director'
 bacula::dir::service_name: 'bacula-dir'
@@ -20,7 +22,6 @@ bacula::dir::pid_directory: /var/run
 bacula::dir::concurrent_jobs: 3
 bacula::dir::message: Daemon
 bacula::dir::config_template: bacula/bacula-dir.conf.erb
-bacula::dir::job_defs_file: JobDefs.conf
 
 
 bacula::client::config_ensure: file

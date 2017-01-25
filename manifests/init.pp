@@ -44,9 +44,17 @@ class bacula (
     $bacula_clients_dir  = undef,
     $bacula_storages_dir = undef,
     $bacula_schedule_dir = undef,
+    $bacula_filesets_dir = undef,
+    $manage_repositorie  = undef,
+
   ){
 
-  class {'::bacula::repo':
-    version => $version,
+  include stdlib
+
+  if str2bool($manage_repositorie) {
+    class {'::bacula::repo':
+      version => $version,
+    }
   }
+
 }
