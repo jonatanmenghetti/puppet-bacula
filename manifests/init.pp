@@ -36,7 +36,14 @@
 # Copyright 2015 Your name here, unless otherwise noted.
 #
 class bacula (
-    $version = 7,
+    $version             = undef,
+    $group               = undef,
+    $user                = undef,
+    $conf_base_dir       = undef,
+    $default_conf_dir    = undef,
+    $bacula_clients_dir  = undef,
+    $bacula_storages_dir = undef,
+    $bacula_schedule_dir = undef,
   ){
 
   class {'::bacula::repo':

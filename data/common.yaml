@@ -1,4 +1,27 @@
 bacula::supported: false
+bacula::user: bacula
+bacula::group: bacula
+bacula::version: 7
+bacula::conf_base_dir: '/etc/bacula'
+bacula::default_conf_dir: conf.d
+bacula::bacula_clients_dir: clients
+bacula::bacula_storages_dir: storages
+bacula::bacula_schedule_dir: schedules
+
+bacula::dir::package_name: 'bacula-director'
+bacula::dir::service_name: 'bacula-dir'
+bacula::dir::manage_clients: true
+bacula::dir::manage_storages: true
+bacula::dir::port: 9101
+bacula::dir::config_file: bacula-dir.conf
+bacula::dir::query_file: /etc/bacula/script/query.sql
+bacula::dir::working_directory: /opt/bacula/working
+bacula::dir::pid_directory: /var/run
+bacula::dir::concurrent_jobs: 3
+bacula::dir::message: Daemon
+bacula::dir::config_template: bacula/bacula-dir.conf.erb
+bacula::dir::job_defs_file: JobDefs.conf
+
 
 bacula::client::config_ensure: file
 bacula::client::client_conf: '/etc/bacula/bacula-fd.conf'
@@ -9,17 +32,8 @@ bacula::client::client_service: 'bacula-fd'
 bacula::client::pid_dir: '/var/run/bacula'
 bacula::client::working_dir: '/var/lib/bacula'
 bacula::client::max_jobs: 3
-bacula::client::hostname: %{::ipaddress}
+bacula::client::hostname: ${::ipaddress}
+bacula::client::clientname: ${::fqdn}
 bacula::client::is_exported: false
-bacula::client::clientname: %{::fqdn}
 bacula::client::port: 9102
 bacula::client::manage_firewall: true
-
-bacula::user: bacula
-bacula::group: bacula
-
-bacula::conf_base_dir: '/etc/bacula'
-bacula::dir:default_conf_dir: 'conf.d'
-bacula::dir::bacula_clients_dir: 'clients'
-bacula::dir::bacula_storages_dir: 'storages'
-

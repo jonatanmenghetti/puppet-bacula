@@ -1,0 +1,36 @@
+# DO NOT EDIT - Managed by Puppet
+#
+# Bacula Director Configuration
+#   for <%= @fqdn %>
+
+
+Director {             
+  Name = <%= @fqdn %>
+  DIRport = <%= @port %>
+  QueryFile = "<%= @query_file %>"
+  WorkingDirectory = "<%= @working_directory %>"
+  PidDirectory = "<%= @pid_directory %>"
+  Maximum Concurrent Jobs = <%= @concurrent_jobs %>
+  Password = "<%= @dir_password %>"  # Console password
+  Messages = <%= @message %>
+}
+
+#Includes
+@|"sh -c 'for f in <%= @bacula_clients_dir -%>/*.conf ; do echo @${f} ; done'"
+@|"sh -c 'for f in <%= @bacula_storages_dir -%>/*.conf ; do echo @${f} ; done'"
+@|"sh -c 'for f in <%= @bacula_schedule_dir -%>/*.conf ; do echo @${f} ; done'"
+
+@/etc/bacula/conf.d/JobDefs.conf
+@/etc/bacula/conf.d/Schedules.conf
+@/etc/bacula/conf.d/Pools.conf
+@/etc/bacula/conf.d/FileSets.conf
+@/etc/bacula/conf.d/Storages.conf
+@/etc/bacula/conf.d/Catalogs.conf
+@/etc/bacula/conf.d/Messages.conf
+@/etc/bacula/bacula-to-zabbix/conf-bacula-dir-messages
+
+Console {
+  Name = monitor7.unimestre.com
+  Password = "MBVg/i8iKt9Qhc29RJf+hIcJUMH/VZDwSSuia29dTGtC"
+  CommandACL = status, .status
+}

@@ -1,16 +1,16 @@
 {
   "name": "puppet-bacula",
-  "version": "1.0.2",
+  "version": "2.0.1",
   "author": "Jonatan Meneghetti",
   "summary": "Puppet Module for configure Bacula",
   "license": "Apache 2.0",
-  "source": "http://gitlab.unimestre.com/puppet/bacula",
-  "project_page": "http://gitlab.unimestre.com/puppet/bacula/blob/master/README.md",
-  "issues_url": "http://gitlab.unimestre.com/puppet/bacula/issues",
+  "source": "https://github.com/jonatanmenghetti/puppet-bacula",
+  "project_page": "https://github.com/jonatanmenghetti/puppet-bacula/blob/master/README.md",
+  "issues_url": "https://github.com/jonatanmenghetti/puppet-bacula/issues",
   "data_provider": "hiera",
   "dependencies": [
     {"name":"puppetlabs/stdlib","version_requirement":">= 1.0.0"},
     {"name":"puppetlabs/concat","version_requirement":">= 1.2.4"},
-    {"name":"puppetlabs/firewall","version_requirement":">= 1.7.0"},
+    {"name":"puppetlabs/firewall","version_requirement":">= 1.7.0"}
   ]
 }

@@ -38,7 +38,7 @@
 #   client_package    => 'bacula-client',
 # }
 
-class bacula::storage(
+class bacula::storage (
     $db_backend           = 'mysql',
     $director             = undef,
     $director_password    = undef,
@@ -63,8 +63,8 @@ class bacula::storage(
   include stdlib
 
   if !(defined(Class['bacula'])) {
-		  fail('You must include the bacula base class before using any bacula defined resources')
-	}
+    fail('You must include the bacula base class before using any bacula defined resources')
+  }
 
   $db_package = $db_backend ? {
     'mysql'  => $mysql_package,
@@ -73,15 +73,15 @@ class bacula::storage(
 
   if $manage_package {
     package {$package:
-      ensure    => latest,
-      provider  => $package_provider,
+      ensure   => latest,
+      provider => $::package_provider,
     } ->
     file { ['/var/lib/bacula',
             '/var/run/bacula',
             '/etc/bacula/bacula-sd.d']:
       ensure => directory,
-      owner => 'bacula',
-      group => 'bacula',
+      owner  => 'bacula',
+      group  => 'bacula',
       before => Service [$service_name],
     } ~>
     service { $service_name:
