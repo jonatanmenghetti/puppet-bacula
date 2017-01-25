@@ -11,13 +11,7 @@ class bacula::repo (
       fail('You must include the bacula base class before using any bacula defined resources')
   }
 
-  if $version == 7 {
-
-    file {'/etc/yum.repos.d/epel-bacula7.repo':
-      ensure => absent,
-    }
-
-    yumrepo { 'epel_bacula7':
+  yumrepo { 'epel_bacula7':
       descr => 'Bacula backports from rawhide',
       baseurl => 'http://repos.fedorapeople.org/repos/slaanesh/bacula7/epel-$releasever/$basearch/',
       enabled => true,

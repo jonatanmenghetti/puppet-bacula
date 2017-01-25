@@ -1,17 +1,22 @@
 class bacula::dir (
-  $bacula_clients_dir     = '/etc/bacula/conf.d/clients',
-  $bacula_storages_dir     = '/etc/bacula/conf.d/storages',
+  $conf_base_dir          = undef,
+  $default_conf_dir       = undef,
+  $bacula_clients_dir     = undef,
+  $bacula_storages_dir    = undef,
   $manage_clients         = true,
   $manage_storages        = true,
 ) {
 
-  file { [$bacula_clients_dir,
-          $bacula_storages_dir]:
+  $bacula_user = getparam(Class['bacula'],"user")
+  $bacula_group = getparam(Class['bacula'],"group")
+
+  file { ["${conf_base_dir}/${default_conf_dir}/${bacula_clients_dir}",
+          "${conf_base_dir}/${default_conf_dir}/${bacula_storages_dir}"]:
     force   => true,
     recurse => true,
     ensure  => directory,
-    owner   => 'bacula',
-    group   => 'bacula',
+    owner   => $bacula_user,
+    group   => $bacula_group,
   }
 
   if $manage_clients {
