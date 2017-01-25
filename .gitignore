@@ -17,6 +17,3 @@ tags
 #Remote
 .remote-sync.json
 
-#vscode ingores
-.vscode
-.editorconfig
