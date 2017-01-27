@@ -62,19 +62,10 @@ define bacula::fileset (
     $_fileset = $name
   }
 
-  if str2bool($option_exclude) {
-    $_option_exclude = "yes"
-  } else {
-    $_option_exclude = "no"
-  }
-
+  $_option_exclude = str2bool($option_exclude,'yes','no') {
 
   if $vss {
-    if str2bool($vss) {
-      $_vss = "yes"
-    } else {
-      $_vss = "no"
-    }
+    $_vss = str2bool($vss,'yes','no')
   }
 
   #Validate input $include_files
