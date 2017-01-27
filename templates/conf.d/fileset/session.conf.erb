@@ -1,0 +1,41 @@
+<% if @session == 'include' -%>
+  Include {
+    Options {
+<% if @signature -%>
+      signature = <%= @signature %>
+<% end -%>
+<% if @compression -%>
+      compression = <%= @compression %>
+<% end -%>
+
+      # WildFiles
+<% @_wildfiles.each do |wildfile| -%>
+      WildFile = "<%= wildfile %>"
+<% end -%>
+<% @_wilddirs.each do |wilddir| -%>
+      WildDir = "<%= wilddir %>"
+<% end -%>
+
+      # Exclude WildFiles,WildDirs
+<% if @_option_exclude -%>
+      Exclude = <%= @_option_exclude %>
+<% end -%>
+    }
+
+<% @_files.each do |file| -%>
+    File = <%= file %>
+<% end -%>
+<% @_exclude_dir_containing.each do |dir_exclude| -%>
+    Exclude Dir Containing = <%= dir_exclude %>
+<% end -%>
+  }
+<% end -%>
+
+<% if @session == 'exclude' -%>
+  Exclude {
+
+<% @_files.each do |file| -%>
+    File = <%= file %>
+<% end -%>
+  }
+<% end -%>

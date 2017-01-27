@@ -9,6 +9,8 @@ define bacula::message (
   $append,
 ) {
 
+  include stdlib
+
   $conf_base_dir        = getparam(Class['bacula'],'conf_base_dir')
   $_default_conf_dir    = getparam(Class['bacula'],'default_conf_dir')
   $default_conf_dir     = "${conf_base_dir}/${_default_conf_dir}"

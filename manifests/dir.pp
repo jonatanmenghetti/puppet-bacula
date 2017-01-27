@@ -92,12 +92,15 @@ class bacula::dir (
     order   => '0'
   }
 
-  concat { "${default_conf_dir}/Pools.conf":
-    ensure => present
+  concat { 'PoolsResource':
+    path   => "${default_conf_dir}/Pools.conf",
+    ensure => present,
+    owner  => $bacula_user,
+    group  => $bacula_group,
   }
 
   concat::fragment {"Pools.conf-header":
-    target  => "${default_conf_dir}/Pools.conf",
+    target  => 'PoolsResource',
     content => template('bacula/header.conf.erb'),
     order   => '0'
   }

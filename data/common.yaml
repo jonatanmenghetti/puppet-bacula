@@ -23,7 +23,6 @@ bacula::dir::concurrent_jobs: 3
 bacula::dir::message: Daemon
 bacula::dir::config_template: bacula/bacula-dir.conf.erb
 
-
 bacula::client::config_ensure: file
 bacula::client::client_conf: '/etc/bacula/bacula-fd.conf'
 bacula::client::client_conf_template: 'bacula/bacula-fd.conf.erb'
