@@ -1,0 +1,38 @@
+# Pools <%= @name%> 
+Pool {
+  Name = <%= @_name %>
+  Pool Type = <%= @type %>
+<% if @volume_retention -%>
+  Volume Use Duration = <%= @volume_duration %>
+<% end -%>
+<% if @volume_retention -%>
+  Volume Retention = <%= @volume_retention %>
+<% end -%>
+<% if @volume_retention -%>
+  File Retention = <%= @file_retention %>
+<% end -%>
+<% if @volume_retention -%>
+  Job Retention = <%= @job_retention %>
+<% end -%>
+<% if @max_jobs -%>
+  Maximum Volume Jobs = <%= @max_jobs %>
+<% end -%>
+<% if @label -%>
+  Label Format = <%= @label %>
+<% end -%>
+<% if @_recycle -%>
+  Recycle = <%= @_recycle %>
+<% end -%>
+<% if @_recycle_old -%>
+  Recycle Oldest Volume = <%= @_recycle_old %>
+<% end -%>
+<% if @_auto_prune -%>
+  Auto Prune = <%= @_auto_prune %>
+<% end -%>
+<% if @purge_action -%>
+  Action On Purge = <%= @purge_action %>
+<% end -%>
+<% if @purge_old -%>
+  Purge Oldest Volume = <%= @purge_old %>
+<% end -%>
+}
