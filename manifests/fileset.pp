@@ -102,29 +102,29 @@ define bacula::fileset (
   }
 
   # Check if fileset resource already exists
-  if ! defined(Concat[$_fileset]) {
-    concat { $_fileset:
+  if ! defined(Concat["fileset-${_fileset}"]) {
+    concat { "fileset-${_fileset}":
       path   => "${bacula_filesets_dir}/${_name}.conf",
       ensure => present,
       owner  => $bacula_user,
       group  => $bacula_group,
     }
 
-    concat::fragment {"${_name}-header":
-      target  => $_fileset,
+    concat::fragment {"fileset-${_name}-header":
+      target  => "fileset-${_fileset}",
       content => template("$config_template_path/header.conf.erb"),
       order   => '0',
     }
 
-    concat::fragment {"${_name}-foot":
-      target  => $_fileset,
+    concat::fragment {"fileset-${_name}-foot":
+      target  => "fileset-${_fileset}",
       content => template("$config_template_path/foot.conf.erb"),
       order   => '9999',
     }
   }
 
   concat::fragment {"${_name}-session":
-    target  => $_fileset,
+    target  => "fileset-${_fileset}",
     content => template("$config_template_path/session.conf.erb"),
     order   => $concat_order,
   }
