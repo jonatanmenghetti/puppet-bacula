@@ -1,15 +1,15 @@
 # DO NOT EDIT - Managed by Puppet
 #
 # Bacula Director Configuration
-#   for <%= @fqdn %>
+#   for <%= @fqdn %>:dir
 
 
 Director {             
-  Name = <%= @fqdn %>
+  Name = "<%= @fqdn %>:dir"
   DIRport = <%= @port %>
   QueryFile = "<%= @query_file %>"
   WorkingDirectory = "<%= @working_directory %>"
-  PidDirectory = "<%= @pid_directory %>"
+  PidDirectory = "<%= @_pid_directory %>"
   Maximum Concurrent Jobs = <%= @concurrent_jobs %>
   Password = "<%= @dir_password %>"  # Console password
   Messages = <%= @message %>

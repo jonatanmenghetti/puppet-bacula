@@ -15,6 +15,7 @@ define bacula::pool (
   $recycle_old      = true,
   $purge_action     = 'Truncate',
   $purge_old        = true,
+  $storage          = undef,
 ) {
 
   include stdlib

@@ -6,11 +6,11 @@
 # Director through which we'll send our messages (will be the same) one.
 
 Storage {
-   Name = <%=storage_name%>:<%=name%>
-   Address = <%=storage_address%>
-   SDPort = <%=port%>
-   Password = "<%=director_password%>"
-   Device = <%=storage_name%>:<%=name%>
-   Media Type = <%=mediatype%>
-   Maximum Concurrent Jobs = <%= concurrent_jobs %>
+   Name = "<%=@storage_name%>:<%=@name%>"
+   Address = <%=@storage_address%>
+   SDPort = <%=@port%>
+   Password = "<%=@director_password%>"
+   Device = <%=@storage_name%>:<%=@name%>
+   Media Type = <%=@mediatype%>
+   Maximum Concurrent Jobs = <%= @concurrent_jobs %>
 }

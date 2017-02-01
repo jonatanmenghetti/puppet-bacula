@@ -1,28 +1,31 @@
 # DO NOT EDIT - Managed by Puppet
 #
 # Bacula File Daemon Configuration
-#   for <%= fqdn %>
-#   via <%= director_server -%>:director (<%= director_server -%>)
+#   for <%= @fqdn %>
+#   via <%= @director -%>:dir (<%= @director -%>)
 
 # Configure the Director which will manage this host's backups
 Director {
-  Name = "<%= director_server -%>"
-  Password = "<%= director_password -%>"
+  Name = "<%= @director -%>:dir"
+  Password = "<%= @password -%>"
 }
 
 # Now configure the actual File Daemon
 FileDaemon {
-  Name = "<%= fqdn -%>:fd"
-  Working Directory = <%= working_dir %>
-  PID Directory = <%= pid_dir %>
-  Maximum Concurrent Jobs = <%= max_jobs %>
-<% if repo_version == "7" -%>
-  Plugin Directory = <%= fd_plugin_dir %>
-<% end -%>
+  Name = "<%= @_client_name -%>:fd"
+  Maximum Concurrent Jobs = <%= @_max_jobs %>
+
+  Plugin Directory = <%= @_plugin_dir %>
+  Working Directory = <%= @_working_directory %>
+  PID Directory = <%= @_pid_directory %>
 }
 
 # Finally, set where the messages are going to go
 Messages {
-  Name = "<%= director_name -%>:messages:standard"
-  Director = "<%= director_server -%>:director" = all, !skipped, !restored
+<% if @_messages != "" %>
+  Name = <%= @_messages %>
+<% else -%>
+  Name = "<%= @director -%>:messages:standard"
+<% end -%>
+  Director = "<%= @director -%>:dir" = all, !skipped, !restored
 }

@@ -52,7 +52,7 @@ class bacula::storage (
     $dir_storage_template = 'bacula/storage/director.conf.erb',
     $manage_package       = false,
     $service_name         = 'bacula-sd',
-    $bacula_storage_dir   = '/etc/bacula/conf.d/Storages/',
+    $bacula_storage_dir   = '/etc/bacula/conf.d/storages/',
     $storage_address      = $::fqdn,
     $port                 = '9103',
     $devices              = undef,
@@ -82,20 +82,16 @@ class bacula::storage (
       ensure => directory,
       owner  => 'bacula',
       group  => 'bacula',
-      before => Service [$service_name],
     } ~>
     service { $service_name:
       ensure  => running,
       enable  => true,
-      require => Package [$package],
     }
   }
 
   file { $storage_conf:
     ensure  => file,
     content => template($template),
-    notify  => Service [$service_name],
-    require => Package [$package],
   }
 
 }

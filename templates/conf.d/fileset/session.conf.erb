@@ -18,15 +18,15 @@
 
       # Exclude WildFiles,WildDirs
 <% if @_option_exclude -%>
-      Exclude = <%= @_option_exclude %>
+      Exclude = "<%= @_option_exclude %>"
 <% end -%>
     }
 
 <% @_files.each do |file| -%>
-    File = <%= file %>
+    File = "<%= file %>"
 <% end -%>
 <% @_exclude_dir_containing.each do |dir_exclude| -%>
-    Exclude Dir Containing = <%= dir_exclude %>
+    Exclude Dir Containing = "<%= dir_exclude %>"
 <% end -%>
   }
 <% end -%>
@@ -35,7 +35,7 @@
   Exclude {
 
 <% @_files.each do |file| -%>
-    File = <%= file %>
+    File = "<%= file %>"
 <% end -%>
   }
 <% end -%>

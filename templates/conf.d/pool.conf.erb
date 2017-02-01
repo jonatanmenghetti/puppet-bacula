@@ -1,7 +1,10 @@
 # Pools <%= @name%> 
 Pool {
-  Name = <%= @_name %>
+  Name      = <%= @_name %>
   Pool Type = <%= @type %>
+<% if @storage %>
+  Storage   = <%= @storage %>
+<% end -%>
 <% if @volume_retention -%>
   Volume Use Duration = <%= @volume_duration %>
 <% end -%>

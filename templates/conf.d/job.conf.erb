@@ -1,0 +1,69 @@
+<% if @is_def -%>
+
+# Create Jobdef for <%= @name %>
+JobDefs {
+  Name = "<%= @name -%>:JobDef"
+<% else %>
+
+Job {
+  Name = "<%= @client -%>:<%=@name-%>"
+<%= defined?(@job_def) ? "  JobDefs = \"#{@job_def}:JobDef\"\n" : "" -%>
+  Client = "<%= @client -%>:fd"
+<% end -%>
+<%= defined?(@_enabled) ? "  Enabled = #{@_enabled}\n" : "" -%>
+<%= defined?(@_type) ? "  Type = #{@_type}\n" : "" -%>
+<%= defined?(@_level) ? "  Level = #{@_level}\n" : "" -%>
+<%= defined?(@accurrate) ? "  Accurate = #{@accurrate}\n" : "" -%>
+<%= defined?(@verify_job) ? "  Verify Job= #{@verify_job}\n" : "" -%>
+<%= defined?(@bootstrap) ? "  Bootstrap = #{@bootstrap}\n" : "" -%>
+<%= defined?(@write_bootstrap) ? "  Write Bootstrap = #{@write_bootstrap}\n" : "" -%>
+<%= defined?(@fileset) ? "  FileSet = #{@fileset}\n" : "" -%>
+<%= defined?(@base) ? "  Base = #{@base}\n" : "" -%>
+<%= defined?(@message) ? "  Messages = #{@message}\n" : "" -%>
+<%= defined?(@pool) ? "  Pool = #{@pool}\n" : "" -%>
+<%= defined?(@full_pool) ? "  Full Backup Pool = #{@full_pool}\n" : "" -%>
+<%= defined?(@diff_pool) ? "  Differential Backup Pool = #{@diff_pool}\n" : "" -%>
+<%= defined?(@incr_pool) ? "  Incremental Backup Pool  = #{@incr_pool}\n" : "" -%>
+<%= defined?(@schedule_name) ? "  Schedule = #{@schedule_name}\n" : "" -%>
+<%= defined?(@storage) ? "  Storage = #{@storage}\n" : "" -%>
+<%= defined?(@max_start_delay) ? "  Max Start Delay = #{@max_start_delay}\n" : "" -%>
+<%= defined?(@max_run_time) ? "  Max Run Time = #{@max_run_time}\n" : "" -%>
+<%= defined?(@max_run_time_inc) ? "  Incremental Max Run Time = #{@max_run_time_inc}\n" : "" -%>
+<%= defined?(@max_run_time_dif) ? "  Differential Max Wait Time = #{@max_run_time_dif}\n" : "" -%>
+<%= defined?(@max_run_sched_time) ? "  Max Run Sched Time = #{@max_run_sched_time}\n" : "" -%>
+<%= defined?(@max_wait_time) ? "  Max Wait Time = #{@max_wait_time}\n" : "" -%>
+<%= defined?(@max_full_interval) ? "  Max Full Interval = #{@max_full_interval}\n" : "" -%>
+<%= defined?(@_prefer_mounted_vol) ? "  Prefer Mounted Volumes = #{@_prefer_mounted_vol}\n" : "" -%>
+<%= defined?(@_prune_jobs) ? "  Prune Jobs = #{@_prune_jobs}\n" : "" -%>
+<%= defined?(@_prune_files) ? "  Prune Files = #{@_prune_files}\n" : "" -%>
+<%= defined?(@_prune_volumes) ? "  Prune Volumes = #{@_prune_volumes}\n" : "" -%>
+<%= defined?(@run_script) ? "  RunScript = #{@run_script}\n" : "" -%>
+<%= defined?(@run_before) ? "  Run Before Job = #{@run_before}\n" : "" -%>
+<%= defined?(@run_after) ? "   Run After Job = #{@run_after}\n" : "" -%>
+<%= defined?(@run_after_failed) ? "  Run After Failed Job = #{@run_after_failed}\n" : "" -%>
+<%= defined?(@client_run_before) ? "  Client Run Before Job = #{@client_run_before}\n" : "" -%>
+<%= defined?(@client_run_after) ? "  Client Run After Job = #{@client_run_after}\n" : "" -%>
+<%= defined?(@_rerun_failed_levels) ? "  Rerun Failed Levels = #{@_rerun_failed_levels}\n" : "" -%>
+<%= defined?(@_spool_data) ? "  Spool Data = #{@_spool_data}\n" : "" -%>
+<%= defined?(@_spool_attr) ? "  Spool Attributes  = #{@_spool_attr}\n" : "" -%>
+<%= defined?(@spool_size) ? "  SpoolSize = #{@spool_size}\n" : "" -%>
+<%= defined?(@where) ? "  Where = #{@where}\n" : "" -%>
+<%= defined?(@prefix) ? "  Add Prefix = #{@prefix}\n" : "" -%>
+<%= defined?(@suffix) ? "  Add Suffix = #{@suffix}\n" : "" -%>
+<%= defined?(@strip) ? "  Strip Prefix = #{@strip}\n" : "" -%>
+<%= defined?(@regex_where) ? "  RegexWhere = #{@regex_where}\n" : "" -%>
+<%= defined?(@replace) ? "  Replace = #{@replace}\n" : "" -%>
+<%= defined?(@_prefix_liks) ? "  Prefix Links = #{@_prefix_liks}\n" : "" -%>
+<%= defined?(@max_concurrent_jobs) ? "  Maximum Concurrent Jobs = #{@max_concurrent_jobs}\n" : "" -%>
+<%= defined?(@_reschedule_error) ? "  Reschedule On Error = #{@_reschedule_error}\n" : "" -%>
+<%= defined?(@reschedule_interval) ? "  Reschedule Interval = #{@reschedule_interval}\n" : "" -%>
+<%= defined?(@reschedule_times) ? "  Reschedule Times = #{@reschedule_times}\n" : "" -%>
+<%= defined?(@_allow_duplicate) ? "  Allow Duplicate Jobs = #{@_allow_duplicate}\n" : "" -%>
+<%= defined?(@_cancel_low_dupl) ? "  Cancel Lower Level Duplicates = #{@_cancel_low_dupl}\n" : "" -%>
+<%= defined?(@_cancel_queued_dupl) ? "  Cancel Queued Duplicates = #{@_cancel_queued_dupl}\n" : "" -%>
+<%= defined?(@cancel_run_dupl) ? "  Cancel Running Duplicates = #{@_cancel_run_dupl}\n" : "" -%>
+<%= defined?(@run) ? "  Run = #{@run}\n" : "" -%>
+<%= defined?(@_priority) ? "  Priority = #{@_priority}\n" : "" -%>
+<%= defined?(@_allow_mixed_priority) ? "  Allow Mixed Priority = #{@_allow_mixed_priority}\n" : "" -%>
+<%= defined?(@_write_part_after) ? "  Write Part After Job = #{@_write_part_after}\n" : "" -%>
+}

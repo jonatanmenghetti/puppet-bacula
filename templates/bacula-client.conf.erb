@@ -1,30 +1,16 @@
 # DO NOT EDIT - Managed by Puppet
 #
 # Bacula Director Client Configuration
-#   for <%= fqdn %>
-#   via <%= director_server -%>:director (<%= director_server -%>)
+#   for <%= @fqdn %>
+#   via <%= @director -%>:dir (<%= @director -%>)
 
 # Configure the Client which backups
 Client {
-  Name = "<%= clientname -%>:fd"
-  Address = "<%= hostname %>"
+  Name = "<%= @_client_name -%>:fd"
+  Address = "<%= @address %>"
   FDPort  = 9102
-  Password = "<%= director_password %>"
+  Password = "<%= @password %>"
   AutoPrune = yes
-  Maximum Concurrent Jobs = 2
-  Catalog = "<%= catalog %>"
+  Maximum Concurrent Jobs = <%= @_max_jobs %>
+  Catalog = "<%= @catalog %>"
 }
-
-<% if $jobs != '' %>
-<% @jobs.sort_by {|key, value| key}.each do |key,value| -%>
-<% if value["Pool"] != "" -%>
-Job {
-  Name = "<%= clientname -%>:<%=key-%>"
-  Client = "<%= clientname -%>:fd"
-<% value.sort_by {|jobkey,jobvalue| jobkey}.each do |jobkey,jobvalue|-%>
-  <%=jobkey-%>      = "<%=jobvalue%>"
-<% end -%>
-}
-<%- end -%>
-<% end %>
-<%end %>

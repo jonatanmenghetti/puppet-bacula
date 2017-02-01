@@ -37,6 +37,12 @@ class bacula::dir (
   $bacula_filesets_dir  = "${default_conf_dir}/${_bacula_filesets_dir}"
   $dir_config_file      = "${conf_base_dir}/${config_file}"
 
+  if ! $pid_directory {
+    $_pid_directory     = getparam(Class['bacula'],'pid_directory')
+  } else {
+    $_pid_directory     = $pid_directory
+  }
+
   package { $package_name:
     ensure => installed,
   }
@@ -82,12 +88,13 @@ class bacula::dir (
     order   => '0'
   }
 
-  concat { "${default_conf_dir}/JobDefs.conf":
-    ensure => present
+  concat { 'JobdefsResource':
+    path   => "${default_conf_dir}/JobDefs.conf",
+    ensure => present,
   }
 
-  concat::fragment {"JobDefs.conf-header":
-    target  => "${default_conf_dir}/JobDefs.conf",
+  concat::fragment {'JobDefs.conf-header':
+    target  => 'JobdefsResource',
     content => template('bacula/header.conf.erb'),
     order   => '0'
   }
