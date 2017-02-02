@@ -157,14 +157,15 @@ define bacula::fd (
     $_messages = $messages
   }
 
-  package {$_package_name:
-    ensure   => latest,
-  }->
-  service { $_service_name:
-    ensure  => running,
-    enable  => true,
+  if ! defined(Package[$_package_name]) {
+    package {$_package_name:
+      ensure   => latest,
+    }->
+    service { $_service_name:
+      ensure  => running,
+      enable  => true,
+    }
   }
-
   if $is_fd {
     file { "fd-configure-${client_name}":
       path    => "${conf_base_dir}/${_config_file}",

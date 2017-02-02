@@ -175,6 +175,13 @@ define bacula::job (
     }
   } else {
 
+    if $type {
+      $_type = $type
+    }
+
+    if $level {
+      $_level = $level
+    }
     if ! $client {
       fail("** Parameter client is required for JobDefs. **")
     }

@@ -38,11 +38,11 @@ Job {
 <%= defined?(@_prune_files) ? "  Prune Files = #{@_prune_files}\n" : "" -%>
 <%= defined?(@_prune_volumes) ? "  Prune Volumes = #{@_prune_volumes}\n" : "" -%>
 <%= defined?(@run_script) ? "  RunScript = #{@run_script}\n" : "" -%>
-<%= defined?(@run_before) ? "  Run Before Job = #{@run_before}\n" : "" -%>
-<%= defined?(@run_after) ? "   Run After Job = #{@run_after}\n" : "" -%>
-<%= defined?(@run_after_failed) ? "  Run After Failed Job = #{@run_after_failed}\n" : "" -%>
-<%= defined?(@client_run_before) ? "  Client Run Before Job = #{@client_run_before}\n" : "" -%>
-<%= defined?(@client_run_after) ? "  Client Run After Job = #{@client_run_after}\n" : "" -%>
+<%= defined?(@run_before) ? "  Run Before Job = \"#{@run_before}\"\n" : "" -%>
+<%= defined?(@run_after) ? "   Run After Job = \"#{@run_after}\"\n" : "" -%>
+<%= defined?(@run_after_failed) ? "  Run After Failed Job = \"#{@run_after_failed}\"\n" : "" -%>
+<%= defined?(@client_run_before) ? "  Client Run Before Job = \"#{@client_run_before}\"\n" : "" -%>
+<%= defined?(@client_run_after) ? "  Client Run After Job = \"#{@client_run_after}\"\n" : "" -%>
 <%= defined?(@_rerun_failed_levels) ? "  Rerun Failed Levels = #{@_rerun_failed_levels}\n" : "" -%>
 <%= defined?(@_spool_data) ? "  Spool Data = #{@_spool_data}\n" : "" -%>
 <%= defined?(@_spool_attr) ? "  Spool Attributes  = #{@_spool_attr}\n" : "" -%>
