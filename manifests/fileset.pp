@@ -10,6 +10,7 @@ define bacula::fileset (
   $compression            = 'gzip',
   $signature              = 'SHA1',
   $option_exclude         = undef,
+  $plugins                 = [],
 
   $exclude_files          = [],
   $exclude_dir_containing = [],
@@ -73,6 +74,12 @@ define bacula::fileset (
     $_files = $files
   } else {
     $_files = any2array($files)
+  }
+
+  if $plugins.is_a(Array) {
+    $_plugins = $plugins
+  } else {
+    $_plugins = any2array($plugins)
   }
 
   #Validate input $exclude_dir_containing

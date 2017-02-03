@@ -6,7 +6,11 @@ JobDefs {
 <% else %>
 
 Job {
+<% if @_set_prefix_jobname %>
   Name = "<%= @client -%>:<%=@name-%>"
+<% else %>
+  Name = "<%=@name-%>"
+<% end -%>
 <%= defined?(@job_def) ? "  JobDefs = \"#{@job_def}:JobDef\"\n" : "" -%>
   Client = "<%= @client -%>:fd"
 <% end -%>

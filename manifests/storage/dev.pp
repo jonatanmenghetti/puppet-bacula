@@ -8,7 +8,7 @@ define bacula::storage::dev (
   $mountpoint               = undef,
   $mountcmmd                = '/bin/mount %m',
   $unmountcmmd              = '/bin/umount %m',
-  $storage_device_dir       = '/etc/bacula/bacula-sd.d/',
+  $storage_device_dir       = '/etc/bacula/bacula-sd.d',
   $storage_device_template  = 'bacula/storage/devices.conf.erb'
 ){
   include stdlib
@@ -42,17 +42,28 @@ define bacula::storage::dev (
     notify => Service['bacula-sd'],
   }
 
+  if !defined(File[$mountpoint]) {
+    file {$mountpoint:
+      ensure => directory,
+      owner  => 'bacula',
+      group  => 'bacula',
+    }
+  }
+  
   if $exporte {
 
-    @@concat { "${bacula_storage_dir}/${storage_name}.conf":
-      owner => 'bacula',
-      group => 'bacula',
-      mode  => '0644',
-      tag => 'baculastorage',
+    if ! defined(Concat[$storage_name]) {
+      @@concat {$storage_name:
+        path  => "${bacula_storage_dir}/${storage_name}.conf",
+        owner => 'bacula',
+        group => 'bacula',
+        mode  => '0644',
+        tag   => 'baculastorage',
+      }
     }
 
-    @@concat::fragment {"stgdev_${storage_name}":
-      target => "$bacula_storage_dir/$storage_name.conf",
+    @@concat::fragment {"stgdev_${storage_name}-${name}":
+      target => "${storage_name}",
       content => template($dir_storage_template),
       tag => 'baculastorage',
       order => 2,

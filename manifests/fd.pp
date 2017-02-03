@@ -157,16 +157,20 @@ define bacula::fd (
     $_messages = $messages
   }
 
-  if ! defined(Package[$_package_name]) {
+  if (! defined(Package[$_package_name])) {
     package {$_package_name:
       ensure   => latest,
-    }->
+    }
+  } 
+
+  if $is_fd {
+
     service { $_service_name:
       ensure  => running,
       enable  => true,
+      require => Package[$_package_name],
     }
-  }
-  if $is_fd {
+
     file { "fd-configure-${client_name}":
       path    => "${conf_base_dir}/${_config_file}",
       ensure  => file,
@@ -176,12 +180,29 @@ define bacula::fd (
   }
 
   if $configure_director {
-      @file { "${_client_name}.conf":
-        ensure  => file,
-        path    => "${bacula_clients_dir}/${_client_name}.conf",
-        content => template($_dir_template),
-        tag     => 'baculaclient',
+      # @@file { "${_client_name}.conf":
+      #   ensure  => file,
+      #   path    => "${bacula_clients_dir}/${_client_name}.conf",
+      #   content => template($_dir_template),
+      #   tag     => 'baculaclient',
+      #   notify  => Exec['breload'],
+      # }
+
+      @@concat { "client-${_client_name}-config":
+        path   => "${bacula_clients_dir}/${_client_name}.conf",
+        ensure => present,
+        owner  => $bacula_user,
+        group  => $bacula_group,
         notify  => Exec['breload'],
+        tag     => 'baculaclient',
+      }
+
+      @@concat::fragment {"client-${_client_name}-config":
+        target  => "client-${_client_name}-config",
+        content => template($_dir_template),
+        order   => '1',
+        notify  => Exec['breload'],
+        tag     => 'baculaclientJob',
       }
     } else {
       
@@ -190,12 +211,14 @@ define bacula::fd (
       ensure => present,
       owner  => $bacula_user,
       group  => $bacula_group,
+      notify  => Exec['breload'],
     }
 
     concat::fragment {"client-${_client_name}-config":
       target  => "client-${_client_name}-config",
       content => template($_dir_template),
-      order   => '1'
+      order   => '1',
+      notify  => Exec['breload'],
     }
   }
 }

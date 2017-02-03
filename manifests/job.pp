@@ -138,6 +138,9 @@ define bacula::job (
     $_priority = $priority
   }
 
+  if ! (':' in "$name") {
+    $_set_prefix_jobname = true
+  } 
 
   # Is Job Definer
   if $is_def {
@@ -183,13 +186,13 @@ define bacula::job (
       $_level = $level
     }
     if ! $client {
-      fail("** Parameter client is required for JobDefs. **")
+      fail("** Parameter client is required for Job. **")
     }
   
     concat::fragment {"client-${client}-config-${name}":
       target  => "client-${client}-config",
       content => template('bacula/conf.d/job.conf.erb'),
-      order   => '10'
+      order   => '10',
     }
 
   }

@@ -68,9 +68,9 @@ class bacula::dir (
     enable => true,
   }
 
-
   if str2bool($manage_clients) {
-    File <<| tag == 'baculaclient' |>>
+    Concat <<| tag == 'baculaclient' |>>
+    Concat::Fragment <<|tag == 'baculaclientJob'|>>
   }
 
   if str2bool($manage_storages) {

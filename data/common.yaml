@@ -22,27 +22,6 @@ bacula::fd_template: bacula/bacula-fd.conf.erb
 bacula::fd_dir_template: bacula/bacula-client.conf.erb
 bacula::fd_max_jobs: 3
 
-bacula::client::config_ensure: file
-bacula::client::client_conf: '/etc/bacula/bacula-fd.conf'
-bacula::client::dir_client_template: 'bacula/bacula-client.conf.erb'
-bacula::client::hostname: ${::ipaddress}
-bacula::client::clientname: ${::fqdn}
-bacula::client::is_exported: false
-bacula::client::port: 9102
-
-bacula::client_conf_template: undef
-bacula::client_template: ''
-bacula::client_client_package: 'bacula-fd'
-bacula::client_service: 'bacula-fd'
-bacula::client_pid_dir: undef
-bacula::client_working_dir: undef
-bacula::client_plugin_dir: undef
-bacula::client_max_jobs: undef
-bacula::client_is_exported: undef
-bacula::client_clientname: $title
-bacula::client_port: undef
-bacula::client_config_ensure: undef
-
 bacula::dir::package_name: 'bacula-director'
 bacula::dir::service_name: 'bacula-dir'
 bacula::dir::manage_clients: true

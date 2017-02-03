@@ -25,6 +25,9 @@
 <% @_files.each do |file| -%>
     File = "<%= file %>"
 <% end -%>
+<% @_plugins.each do |plugin| -%>
+    Plugin = "<%= plugin %>"
+<% end -%>
 <% @_exclude_dir_containing.each do |dir_exclude| -%>
     Exclude Dir Containing = "<%= dir_exclude %>"
 <% end -%>
