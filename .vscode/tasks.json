@@ -1,16 +1,23 @@
 {
     // See https://go.microsoft.com/fwlink/?LinkId=733558
     // for the documentation about the tasks.json format
-    "version": "0.1.0",
+    "version": "0.1.1",
     "command": "rsync",
     "isShellCommand": true,
-    "args" : ["-rvupog","--delete-excluded","${workspaceRoot}/","root@puppet.mnztecnologia.com.br:/etc/puppetlabs/code/environments/production/modules/bacula/"],
+    "args"    : ["-rvupog"],
     "showOutput": "always",
     "echoCommand": true,
     "suppressTaskName": true,
-     "Tasks": [
+    "tasks": [
       {
-        "TaskName": "Sync",
+        "taskName": "Up",
+        "args": ["--delete-excluded","${workspaceRoot}/","root@puppet.mnztecnologia.com.br:/etc/puppetlabs/code/environments/production/modules/bacula/"],
+        "suppressTaskName": true,
+      },
+      {
+       "taskName": "Down",
+        "args": ["root@puppet.mnztecnologia.com.br:/etc/puppetlabs/code/environments/production/modules/bacula/","${workspaceRoot}/"],
+        "suppressTaskName": true,
       }
     ]
 }
