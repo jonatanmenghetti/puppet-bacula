@@ -7,7 +7,7 @@ JobDefs {
 
 Job {
 <% if @_set_prefix_jobname %>
-  Name = "<%= @client -%>:<%=@name-%>"
+  Name = "<%= @client -%>:<%= defined?(@fileset) ? "#{@fileset}" : "#{@name}" -%>"
 <% else %>
   Name = "<%=@name-%>"
 <% end -%>

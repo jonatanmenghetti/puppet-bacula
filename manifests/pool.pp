@@ -10,7 +10,7 @@ define bacula::pool (
   $volume_retention = "7 days",
   $file_retention   = '7 days',
   $job_retention    = '7 days',
-  $label            = '${Client}-${Pool}-${NumVols}',
+  $label            = '${Pool}-${NumVols}',
   $recycle          = true,
   $recycle_old      = true,
   $purge_action     = 'Truncate',
