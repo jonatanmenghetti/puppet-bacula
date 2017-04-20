@@ -1,7 +1,13 @@
 Messages {
 	Name = "<%= @_name %>"
 	mailcommand = "<%= @mail_command %>"
+  <% if @operator_command != "" -%>
+  operatorcommand = "<%= @operator_command %>"
+  <% end -%>
 	mail = <%= @mail -%> = all, !skipped
+  <% if @operator != "" -%>
+  operator = <%= @operator %>
+  <% end -%>
 	console = <%= @console %>
 	append = <%= @append %>
 }

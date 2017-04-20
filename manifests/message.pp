@@ -7,6 +7,8 @@ define bacula::message (
   $mail,
   $console,
   $append,
+  $operator_command = undef,
+  $operator = undef,
 ) {
 
   include stdlib
