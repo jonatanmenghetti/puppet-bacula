@@ -59,7 +59,7 @@ define bacula::storage::dev (
   # Create only device configuration
 
       if ! defined(Concat["${storage_name}_${name}"]) {
-        @@concat {$storage_name:
+        @@concat {"${storage_name}_${name}":
           path  => "${bacula_storage_dir}/${storage_name}-${name}.conf",
           owner => 'bacula',
           group => 'bacula',
