@@ -1,5 +1,5 @@
 define bacula::storage::dev (
-  $storage_name             = undef,
+  $storage                  = undef,
   $mediatype                = 'File',
   $device                   = undef,
   $requiremount             = 'yes',
@@ -14,10 +14,15 @@ define bacula::storage::dev (
 ){
   include stdlib
 
+  if !$storage {
+    $storage_name = getparam(Class['bacula::storage'],'storage_name')
+  } else {
+    $storage_name = $storage
+  }
+
   $storage_conf = getparam(Class['bacula::storage'],'storage_conf')
   $director = getparam(Class['bacula::storage'],'director')
   $director_password = getparam(Class['bacula::storage'],'director_password')
-  $storage_name = getparam(Class['bacula::storage'],'storage_name')
   $console_password = getparam(Class['bacula::storage'],'console_password')
   $template = getparam(Class['bacula::storage'],'template')
   $dir_storage_template = getparam(Class['bacula::storage'],'dir_storage_template')
