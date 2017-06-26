@@ -82,7 +82,7 @@ define bacula::storage::dev (
         target => "${storage_name}",
         content => template($dir_storage_template),
         tag => 'baculastorage',
-        order => 3,
+        order => 2,
         notify => Exec['breload'],
       }
     }
@@ -98,7 +98,7 @@ define bacula::storage::dev (
           target => "${storage_name}",
           content => "}\n",
           tag => 'baculastorage',
-          order => 3,
+          order => 999,
           notify => Exec['breload'],  
     }
   }
