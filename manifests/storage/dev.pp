@@ -1,5 +1,5 @@
 define bacula::storage::dev (
-  $device_only              = false,
+  $storage                  = undef,
   $mediatype                = 'File',
   $device                   = undef,
   $requiremount             = 'yes',
@@ -10,7 +10,7 @@ define bacula::storage::dev (
   $mountcmmd                = '/bin/mount %m',
   $unmountcmmd              = '/bin/umount %m',
   $storage_device_dir       = '/etc/bacula/bacula-sd.d',
-  $storage_device_template  = 'bacula/storage/devices.conf.erb'
+  $storage_device_template  = 'bacula/storage/devices.conf.erb',
 ){
   include stdlib
 
@@ -72,14 +72,29 @@ define bacula::storage::dev (
       notify => Exec['breload'],
     }
 
-    if !$device_only {
+    if ! defined($storage) {
       @@concat::fragment {"stgdev_${storage_name}-${name}":
         target => "${storage_name}",
         content => template($dir_storage_template),
         tag => 'baculastorage',
-        order => 2,
+        order => 3,
         notify => Exec['breload'],
       }
+    } else {
+      @@concat::fragment {"stgdev_${storage_name}-${name}-devices":
+        target => "${storage_name}",
+        content => "Device = ${storage_name}:${name}",
+        tag => 'baculastorage',
+        order => 3,
+        notify => Exec['breload'],  
+    }
+
+    @@concat::fragment {"stgdev_${storage_name}-${name}-devices":
+        target => "${storage_name}",
+        content => "}",
+        tag => 'baculastorage',
+        order => 3,
+        notify => Exec['breload'],  
     }
   }
 }
