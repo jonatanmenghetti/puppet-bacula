@@ -1,4 +1,5 @@
 define bacula::storage::dev (
+  $device_only              = false,
   $mediatype                = 'File',
   $device                   = undef,
   $requiremount             = 'yes',
@@ -52,6 +53,9 @@ define bacula::storage::dev (
   
   if $exporte {
 
+   # Create only device configuration
+   if !$device_only {
+
     if ! defined(Concat[$storage_name]) {
       @@concat {$storage_name:
         path  => "${bacula_storage_dir}/${storage_name}.conf",
@@ -61,6 +65,8 @@ define bacula::storage::dev (
         tag   => 'baculastorage',
       }
     }
+
+   }
 
     @@concat::fragment {"stgdev_${storage_name}-${name}":
       target => "${storage_name}",
