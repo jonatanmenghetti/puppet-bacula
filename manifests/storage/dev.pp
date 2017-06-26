@@ -85,21 +85,22 @@ define bacula::storage::dev (
         order => 2,
         notify => Exec['breload'],
       }
-    }
-    @@concat::fragment {"stgdev_${storage_name}-${name}-devices":
+
+       
+      @@concat::fragment {"stgdev_${storage_name}-${name}-endblock":
         target => "${storage_name}",
-        content => "Device = ${storage_name}:${name}\n",
+        content => "}\n",
         tag => 'baculastorage',
-        order => 3,
+        order => 999,
         notify => Exec['breload'],  
       }
-    
-    @@concat::fragment {"stgdev_${storage_name}-${name}-endblock":
-          target => "${storage_name}",
-          content => "}\n",
-          tag => 'baculastorage',
-          order => 999,
-          notify => Exec['breload'],  
+    }
+    @@concat::fragment {"stgdev_${storage_name}-${name}-devices":
+      target => "${storage_name}",
+      content => "Device = ${storage_name}:${name}\n",
+      tag => 'baculastorage',
+      order => 3,
+      notify => Exec['breload'],  
     }
   }
 }
