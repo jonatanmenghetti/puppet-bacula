@@ -53,7 +53,7 @@ define bacula::storage::dev (
   
   if $exporte {
 
-   @@concat::fragment {"stgdev_${storage_name}-${name}":
+   @@concat::fragment {"stgdev_${storage_name}-${name}-header":
       target => "${storage_name}",
       content => '# DO NOT EDIT - Managed by Puppet
 #
