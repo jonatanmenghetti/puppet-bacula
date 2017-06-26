@@ -8,7 +8,7 @@ Storage {
 <% @devices.each do | dev | %>
    Device = <%=@dev%>
 <%end%>
-<%=else -%>
+<% else -%>
    Device = <%=@storage_name%>:<%=@name%>
 <% end -%>
    Media Type = <%=@mediatype%>
