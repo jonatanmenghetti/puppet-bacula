@@ -67,26 +67,25 @@ define bacula::storage::dev (
     }
 
    # Create only device configuration
-   if !$device_only {
+    if !$device_only {
 
-    if ! defined(Concat[$storage_name]) {
-      @@concat {$storage_name:
-        path  => "${bacula_storage_dir}/${storage_name}.conf",
-        owner => 'bacula',
-        group => 'bacula',
-        mode  => '0644',
-        tag   => 'baculastorage',
+      if ! defined(Concat[$storage_name]) {
+        @@concat {$storage_name:
+          path  => "${bacula_storage_dir}/${storage_name}.conf",
+          owner => 'bacula',
+          group => 'bacula',
+          mode  => '0644',
+          tag   => 'baculastorage',
+        }
       }
-    }
 
-   }
-
-    @@concat::fragment {"stgdev_${storage_name}-${name}":
-      target => "${storage_name}",
-      content => template($dir_storage_template),
-      tag => 'baculastorage',
-      order => 2,
-      notify => Exec['breload'],
+      @@concat::fragment {"stgdev_${storage_name}-${name}":
+        target => "${storage_name}",
+        content => template($dir_storage_template),
+        tag => 'baculastorage',
+        order => 2,
+        notify => Exec['breload'],
+      }
     }
   }
 }
