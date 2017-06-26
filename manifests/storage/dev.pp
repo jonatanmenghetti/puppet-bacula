@@ -67,7 +67,6 @@ define bacula::storage::dev (
     }
 
    # Create only device configuration
-    if !$device_only {
 
       if ! defined(Concat[$storage_name]) {
         @@concat {$storage_name:
@@ -79,6 +78,7 @@ define bacula::storage::dev (
         }
       }
 
+    if !$device_only {
       @@concat::fragment {"stgdev_${storage_name}-${name}":
         target => "${storage_name}",
         content => template($dir_storage_template),
