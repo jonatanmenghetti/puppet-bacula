@@ -55,13 +55,12 @@ define bacula::storage::dev (
       group  => 'bacula',
     }
   }
-  
   if $exporte {
-   # Create only device configuration
+  # Create only device configuration
 
-      if ! defined(Concat[$storage_name]) {
+      if ! defined(Concat["${storage_name}_${name}"]) {
         @@concat {$storage_name:
-          path  => "${bacula_storage_dir}/${storage_name}.conf",
+          path  => "${bacula_storage_dir}/${storage_name}-${name}.conf",
           owner => 'bacula',
           group => 'bacula',
           mode  => '0644',
@@ -69,38 +68,31 @@ define bacula::storage::dev (
         }
       }
 
-       @@concat::fragment {"stgdev_${storage_name}-${name}-header":
-      target => "${storage_name}",
-      content => template('bacula/header.conf.erb'),
-      tag => 'baculastorage',
-      order => 0,
-      notify => Exec['breload'],
-    }
+      @@concat::fragment {"stgdev_${storage_name}-${name}-header":
+        target  => "${storage_name}_${name}",
+        content => template('bacula/header.conf.erb'),
+        tag     => 'baculastorage',
+        order   => 0,
+        notify  => Exec['breload'],
+      }
 
     if ! $storage {
-      @@concat::fragment {"stgdev_${storage_name}-${name}":
-        target => "${storage_name}",
-        content => template($dir_storage_template),
-        tag => 'baculastorage',
-        order => 2,
-        notify => Exec['breload'],
-      }
 
-       
-      @@concat::fragment {"stgdev_${storage_name}-${name}-endblock":
-        target => "${storage_name}",
-        content => "}\n",
-        tag => 'baculastorage',
-        order => 999,
-        notify => Exec['breload'],  
+      @@concat::fragment {"stgdev_${storage_name}-${name}":
+        target  => "${storage_name}_${name}",
+        content => template($dir_storage_template),
+        tag     => 'baculastorage',
+        order   => 2,
+        notify  => Exec['breload'],
       }
     }
+
     @@concat::fragment {"stgdev_${storage_name}-${name}-devices":
-      target => "${storage_name}",
+      target  => "${storage_name}_${name}",
       content => "Device = ${storage_name}:${name}\n",
-      tag => 'baculastorage',
-      order => 3,
-      notify => Exec['breload'],  
+      tag     => 'baculastorage',
+      order   => 3,
+      notify  => Exec['breload'],
     }
   }
 }
