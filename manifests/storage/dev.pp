@@ -1,5 +1,4 @@
 define bacula::storage::dev (
-  $storage_name             = $,
   $mediatype                = 'File',
   $device                   = undef,
   $requiremount             = 'yes',
@@ -52,20 +51,6 @@ define bacula::storage::dev (
   }
   
   if $exporte {
-
-   @@concat::fragment {"stgdev_${storage_name}-${name}-header":
-      target => "${storage_name}",
-      content => '# DO NOT EDIT - Managed by Puppet
-#
-# Device Bacula Storage Configuration
-
-# Configure the Director which will manage this Storage Daemon, and the
-# Director through which we\'ll send our messages (will be the same) one.',
-      tag => 'baculastorage',
-      order => 0,
-      notify => Exec['breload'],
-    }
-
    # Create only device configuration
 
       if ! defined(Concat[$storage_name]) {
@@ -77,6 +62,19 @@ define bacula::storage::dev (
           tag   => 'baculastorage',
         }
       }
+
+       @@concat::fragment {"stgdev_${storage_name}-${name}-header":
+      target => "${storage_name}",
+      content => '# DO NOT EDIT - Managed by Puppet
+#
+# Device Bacula Storage Configuration
+
+# Configure the Director which will manage this Storage Daemon, and the
+# Director through which we\'ll send our messages (will be the same) one.',
+      tag => 'baculastorage',
+      order => 0,
+      notify => Exec['breload'],
+    }
 
     if !$device_only {
       @@concat::fragment {"stgdev_${storage_name}-${name}":
