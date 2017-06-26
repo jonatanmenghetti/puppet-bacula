@@ -1,5 +1,5 @@
 define bacula::storage::dev (
-  $device_only              = false,
+  $storage_name             = $,
   $mediatype                = 'File',
   $device                   = undef,
   $requiremount             = 'yes',
