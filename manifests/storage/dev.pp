@@ -93,14 +93,13 @@ define bacula::storage::dev (
         order => 3,
         notify => Exec['breload'],  
       }
-
-      @@concat::fragment {"stgdev_${storage_name}-${name}-endblock":
+    }
+     @@concat::fragment {"stgdev_${storage_name}-${name}-endblock":
           target => "${storage_name}",
           content => "}",
           tag => 'baculastorage',
           order => 3,
           notify => Exec['breload'],  
-      }
     }
   }
 }
