@@ -66,12 +66,7 @@ define bacula::storage::dev (
 
        @@concat::fragment {"stgdev_${storage_name}-${name}-header":
       target => "${storage_name}",
-      content => '# DO NOT EDIT - Managed by Puppet
-#
-# Device Bacula Storage Configuration
-
-# Configure the Director which will manage this Storage Daemon, and the
-# Director through which we\'ll send our messages (will be the same) one.',
+      content => template('bacula/header.conf.erb'),
       tag => 'baculastorage',
       order => 0,
       notify => Exec['breload'],
