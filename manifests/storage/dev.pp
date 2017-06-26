@@ -36,7 +36,7 @@ define bacula::storage::dev (
     mode  => '0644'
   }
 
-  concat::fragment { "dev_${name}":
+  concat::fragment { "dev_${name}-header":
     target => "$storage_device_dir/device_${name}.conf",
     content => '# DO NOT EDIT - Managed by Puppet
 #
