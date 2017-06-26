@@ -4,7 +4,7 @@ Storage {
    Address = <%=@storage_address%>
    SDPort = <%=@port%>
    Password = "<%=@director_password%>"
-<% if @devices.kind_of?(Array) -%>
+<% if @devices.class?(Array) -%>
 <% @devices.each do | dev | -%>
    Device = <%=@dev%>
 <%end -%>
