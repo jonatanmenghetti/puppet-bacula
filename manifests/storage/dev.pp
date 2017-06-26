@@ -77,7 +77,7 @@ define bacula::storage::dev (
       notify => Exec['breload'],
     }
 
-    if ! defined($storage) {
+    if ! $storage {
       @@concat::fragment {"stgdev_${storage_name}-${name}":
         target => "${storage_name}",
         content => template($dir_storage_template),
