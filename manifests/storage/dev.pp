@@ -1,5 +1,5 @@
 define bacula::storage::dev (
-  $storage                  = undef,
+  $storage_name             = undef,
   $mediatype                = 'File',
   $device                   = undef,
   $requiremount             = 'yes',
@@ -87,14 +87,15 @@ define bacula::storage::dev (
         tag => 'baculastorage',
         order => 3,
         notify => Exec['breload'],  
-    }
+      }
 
-    @@concat::fragment {"stgdev_${storage_name}-${name}-devices":
-        target => "${storage_name}",
-        content => "}",
-        tag => 'baculastorage',
-        order => 3,
-        notify => Exec['breload'],  
+      @@concat::fragment {"stgdev_${storage_name}-${name}-devices":
+          target => "${storage_name}",
+          content => "}",
+          tag => 'baculastorage',
+          order => 3,
+          notify => Exec['breload'],  
+      }
     }
   }
 }
