@@ -4,13 +4,9 @@ Storage {
    Address = <%=@storage_address%>
    SDPort = <%=@port%>
    Password = "<%=@director_password%>"
-<% if @devices.count > 0 -%>
-<% @devices.each do | dev | -%>
-   Device = <%=@dev%>
+<% [@devices].each do | dev | -%>
+   Device = "<%=@dev%>"
 <%end -%>
-<% else -%>
-   Device = <%=@storage_name%>:<%=@name%>
-<% end -%>
    Media Type = <%=@mediatype%>
    Maximum Concurrent Jobs = <%= @concurrent_jobs %>
 }
