@@ -55,7 +55,7 @@ class bacula::storage (
     $bacula_storage_dir   = '/etc/bacula/conf.d/storages/',
     $storage_address      = $::fqdn,
     $port                 = '9103',
-    $devices              = undef,
+    $devices              = [],
     $exporte              = true,
     $concurrent_jobs      = '6',
 ) {
