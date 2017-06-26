@@ -38,6 +38,19 @@ define bacula::storage::dev (
 
   concat::fragment { "dev_${name}":
     target => "$storage_device_dir/device_${name}.conf",
+    content => '# DO NOT EDIT - Managed by Puppet
+#
+# Device Bacula Storage Configuration
+
+# Configure the Director which will manage this Storage Daemon, and the
+# Director through which we\'ll send our messages (will be the same) one.
+',
+    order => 1,
+    notify => Service['bacula-sd'],
+  }
+
+  concat::fragment { "dev_${name}":
+    target => "$storage_device_dir/device_${name}.conf",
     content => template($storage_device_template),
     order => 1,
     notify => Service['bacula-sd'],
