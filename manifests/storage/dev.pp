@@ -62,7 +62,7 @@ define bacula::storage::dev (
 
       if ! defined(Concat["${storage_name}_${name}"]) {
         @@concat {"${storage_name}_${name}":
-          path  => "${bacula_storage_dir}/${storage_name}-${name}.conf",
+          path  => "${bacula_storage_dir}/${storage_name}.conf",
           owner => 'bacula',
           group => 'bacula',
           mode  => '0644',
@@ -101,7 +101,7 @@ define bacula::storage::dev (
       target  => "${storage_name}_${name}",
       content => "\tDevice = ${storage_name}:${name}\n",
       tag     => 'baculastorage',
-      order   => 3,
+      order   => "${id}3",
       notify  => Exec['breload'],
     }
   }
