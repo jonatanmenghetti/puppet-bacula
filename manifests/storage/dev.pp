@@ -1,4 +1,5 @@
 define bacula::storage::dev (
+  $id,
   $storage                  = undef,
   $mediatype                = 'File',
   $device                   = undef,
@@ -35,14 +36,15 @@ define bacula::storage::dev (
   $concurrent_jobs = getparam(Class['bacula::storage'],'concurrent_jobs')
 
 
-  concat { "${storage_device_dir}/device_${name}.conf":
+  concat { "dev_${name}":
+    path  => "${storage_device_dir}/device_${name}.conf",
     owner => 'bacula',
     group => 'bacula',
     mode  => '0644'
   }
 
-  concat::fragment { "dev_${name}":
-    target  => "${storage_device_dir}/device_${name}.conf",
+  concat::fragment { "dev_${name}_storage":
+    target  => "dev_${name}",
     content => template($storage_device_template),
     order   => 1,
     notify  => Service['bacula-sd'],
@@ -55,8 +57,8 @@ define bacula::storage::dev (
       group  => 'bacula',
     }
   }
+
   if $exporte {
-  # Create only device configuration
 
       if ! defined(Concat["${storage_name}_${name}"]) {
         @@concat {"${storage_name}_${name}":
@@ -72,7 +74,7 @@ define bacula::storage::dev (
         target  => "${storage_name}_${name}",
         content => template('bacula/header.conf.erb'),
         tag     => 'baculastorage',
-        order   => 0,
+        order   => "${id}0",
         notify  => Exec['breload'],
       }
 
@@ -82,7 +84,7 @@ define bacula::storage::dev (
         target  => "${storage_name}_${name}",
         content => template($dir_storage_template),
         tag     => 'baculastorage',
-        order   => 2,
+        order   => "${id}2",
         notify  => Exec['breload'],
       }
 
@@ -90,7 +92,7 @@ define bacula::storage::dev (
         target  => "${storage_name}_${name}",
         content => "}\n",
         tag     => 'baculastorage',
-        order   => 999,
+        order   => "${id}9",
         notify  => Exec['breload'],
       }
     }
