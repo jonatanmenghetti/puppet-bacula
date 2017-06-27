@@ -85,11 +85,19 @@ define bacula::storage::dev (
         order   => 2,
         notify  => Exec['breload'],
       }
+
+      @@concat::fragment {"stgdev_${storage_name}-${name}-devices":
+        target  => "${storage_name}_${name}",
+        content => "}\n",
+        tag     => 'baculastorage',
+        order   => 999,
+        notify  => Exec['breload'],
+      }
     }
 
     @@concat::fragment {"stgdev_${storage_name}-${name}-devices":
       target  => "${storage_name}_${name}",
-      content => "Device = ${storage_name}:${name}\n",
+      content => "\tDevice = ${storage_name}:${name}\n",
       tag     => 'baculastorage',
       order   => 3,
       notify  => Exec['breload'],
