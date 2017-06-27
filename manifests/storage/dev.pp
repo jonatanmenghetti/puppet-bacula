@@ -60,8 +60,8 @@ define bacula::storage::dev (
 
   if $exporte {
 
-      if ! defined(Concat["${storage_name}_${name}"]) {
-        @@concat {"${storage_name}_${name}":
+      if ! defined(Concat[$storage_name]) {
+        @@concat {$storage_name:
           path  => "${bacula_storage_dir}/${storage_name}.conf",
           owner => 'bacula',
           group => 'bacula',
@@ -71,7 +71,7 @@ define bacula::storage::dev (
       }
 
       @@concat::fragment {"stgdev_${storage_name}-${name}-header":
-        target  => "${storage_name}_${name}",
+        target  => $storage_name,
         content => template('bacula/header.conf.erb'),
         tag     => 'baculastorage',
         order   => "${id}0",
@@ -81,7 +81,7 @@ define bacula::storage::dev (
     if ! $storage {
 
       @@concat::fragment {"stgdev_${storage_name}-${name}":
-        target  => "${storage_name}_${name}",
+        target  => $storage_name,
         content => template($dir_storage_template),
         tag     => 'baculastorage',
         order   => "${id}2",
@@ -89,7 +89,7 @@ define bacula::storage::dev (
       }
 
       @@concat::fragment {"stgdev_${storage_name}-${name}-devices-end":
-        target  => "${storage_name}_${name}",
+        target  => $storage_name,
         content => "}\n",
         tag     => 'baculastorage',
         order   => "${id}9",
@@ -98,7 +98,7 @@ define bacula::storage::dev (
     }
 
     @@concat::fragment {"stgdev_${storage_name}-${name}-devices":
-      target  => "${storage_name}_${name}",
+      target  => $storage_name,
       content => "\tDevice = ${storage_name}:${name}\n",
       tag     => 'baculastorage',
       order   => "${id}3",
