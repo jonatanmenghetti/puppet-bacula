@@ -86,7 +86,7 @@ define bacula::storage::dev (
         notify  => Exec['breload'],
       }
 
-      @@concat::fragment {"stgdev_${storage_name}-${name}-devices":
+      @@concat::fragment {"stgdev_${storage_name}-${name}-devices-end":
         target  => "${storage_name}_${name}",
         content => "}\n",
         tag     => 'baculastorage',
