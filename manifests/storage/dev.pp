@@ -23,7 +23,7 @@ define bacula::storage::dev (
   }
 
   if $autoselect in ['no',false] {
-    $_autoselect = 'no',
+    $_autoselect = 'no'
   }
 
   $storage_conf = getparam(Class['bacula::storage'],'storage_conf')
