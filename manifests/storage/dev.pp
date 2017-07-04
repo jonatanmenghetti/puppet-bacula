@@ -1,6 +1,7 @@
 define bacula::storage::dev (
   $id,
   $storage                  = undef,
+  $autoselect               = undef,
   $mediatype                = 'File',
   $device                   = undef,
   $requiremount             = 'yes',
@@ -19,6 +20,10 @@ define bacula::storage::dev (
     $storage_name = getparam(Class['bacula::storage'],'storage_name')
   } else {
     $storage_name = $storage
+  }
+
+  if $autoselect in ['no',false] {
+    $_autoselect = 'no',
   }
 
   $storage_conf = getparam(Class['bacula::storage'],'storage_conf')
