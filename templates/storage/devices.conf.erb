@@ -16,5 +16,7 @@ Device {
   Mount Command = "<%=@mountcmmd%>"
   Unmount Command = "<%=@unmountcmmd%>"
   RemovableMedia  = <%=@removable%>
+  <% if @_autoselect -%>
   Autoselect      = <%=@_autoselect%>
+  <% end%>
 }
