@@ -13,6 +13,7 @@ define bacula::storage::dev (
   $unmountcmmd              = '/bin/umount %m',
   $storage_device_dir       = '/etc/bacula/bacula-sd.d',
   $storage_device_template  = 'bacula/storage/devices.conf.erb',
+  $maxconcurrentjobs        = undef,
 ){
   include stdlib
 
