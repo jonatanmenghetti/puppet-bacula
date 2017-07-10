@@ -6,19 +6,19 @@
 # Director through which we'll send our messages (will be the same) one.
 
 Device {
-  Name = <%=@storage_name%>:<%=@name%>
-  Media Type = <%=@mediatype%>
-  Archive Device = <%=@device%>
-  LabelMedia = <%=@label%>
-  Requires Mount = <%=@requiremount%>
-  AutomaticMount = <%=@automount%>
-  Mount Point = <%=@mountpoint%>
-  Mount Command = "<%=@mountcmmd%>"
-  Unmount Command = "<%=@unmountcmmd%>"
-  RemovableMedia  = <%=@removable%>
+  Name                    = <%=@storage_name%>:<%=@name%>
+  Media Type              = <%=@mediatype%>
+  Archive Device          = <%=@device%>
+  LabelMedia              = <%=@label%>
+  Requires Mount          = <%=@requiremount%>
+  AutomaticMount          = <%=@automount%>
+  Mount Point             = <%=@mountpoint%>
+  Mount Command           = "<%=@mountcmmd%>"
+  Unmount Command         = "<%=@unmountcmmd%>"
+  RemovableMedia          = <%=@removable%>
 <% if @_autoselect -%>
-  Autoselect      = <%=@_autoselect%>
-<% end -%>
+  Autoselect              = <%=@_autoselect%>
+<% end %>
 <% if @maxconcurrentjobs -%>
   Maximum Concurrent Jobs = <%=@maxconcurrentjobs%>
 <% end %>
